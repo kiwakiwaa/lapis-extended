@@ -767,6 +767,16 @@
             });
         },
 
+        applyTransparencySettings() {
+            const {lapisCard} = this.elements;
+            if (!lapisCard) return;
+
+            const savedTransparencyValue = localStorage.getItem("lapisTransparency");
+            if (savedTransparencyValue) {
+                lapisCard.style.setProperty('--transparency-level', savedTransparencyValue);
+            }
+        },
+
         init() {
             if (this.initialized) return;
 
@@ -775,6 +785,7 @@
             this.identifyActiveDictionaries();
             this.detectNarrowMode();
             this.applyFontSettings();
+            this.applyTransparencySettings();
 
             this.initialized = true;
         }
@@ -1018,12 +1029,11 @@
         if (!transparencySlider) return;
 
         function loadSavedTransparentSetting() {
-            const {lapisCard, transparencyValue, transparencySlider} = window.cardContext.elements;
-            if (!lapisCard || !transparencyValue || !transparencySlider) return;
+            const {transparencyValue, transparencySlider} = window.cardContext.elements;
+            if (!transparencyValue || !transparencySlider) return;
 
             const savedTransparencyValue = localStorage.getItem("lapisTransparency");
             if (savedTransparencyValue) {
-                lapisCard.style.setProperty('--transparency-level', savedTransparencyValue);
                 transparencySlider.value = savedTransparencyValue
                 transparencyValue.textContent = Math.round(savedTransparencyValue * 100) + '%';
             }
