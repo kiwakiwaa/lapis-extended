@@ -2,93 +2,384 @@
 <header style="visibility: hidden"></header>
 
 <main lang="ja" style="width: 100%;">
-  <!--------- Vocab card ---------->
-  {{^IsSentenceCard}} {{^IsWordAndSentenceCard}} {{^IsClickCard}}
-  {{^IsAudioCard}}
-  <div lang="ja" class="front-vocab">{{Expression}}</div>
-  {{/IsAudioCard}} {{/IsClickCard}} {{/IsWordAndSentenceCard}}
-  {{/IsSentenceCard}}
+    <div class="lapis-card">
+        <!--------- Vocab card ---------->
+        {{^IsSentenceCard}} {{^IsWordAndSentenceCard}} {{^IsClickCard}}
+        {{^IsAudioCard}}
+        <div lang="ja" class="front-vocab">{{Expression}}</div>
+        {{/IsAudioCard}} {{/IsClickCard}} {{/IsWordAndSentenceCard}}
+        {{/IsSentenceCard}}
 
-  <!------- Sentence card --------->
-  {{#IsSentenceCard}}
-  <div lang="ja" class="front-sentence">
-    {{#SentenceFurigana}} {{kanji:SentenceFurigana}} {{/SentenceFurigana}}
-    {{^SentenceFurigana}} {{kanji:Sentence}} {{/SentenceFurigana}}
-  </div>
-  {{/IsSentenceCard}}
+        <!------- Sentence card --------->
+        {{#IsSentenceCard}}
+        <div lang="ja" class="front-sentence">
+            {{#SentenceFurigana}} {{kanji:SentenceFurigana}} {{/SentenceFurigana}}
+            {{^SentenceFurigana}} {{kanji:Sentence}} {{/SentenceFurigana}}
+        </div>
+        {{/IsSentenceCard}}
 
-  <!--------- Word And Sentence card ----------->
-  {{#IsWordAndSentenceCard}}
-  <div lang="ja" class="front-vocab">{{Expression}}</div>
-  <div lang="ja" id="hint">
-    {{#SentenceFurigana}} {{kanji:SentenceFurigana}} {{/SentenceFurigana}}
-    {{^SentenceFurigana}} {{kanji:Sentence}} {{/SentenceFurigana}}
-  </div>
-  {{/IsWordAndSentenceCard}}
+        <!--------- Word And Sentence card ----------->
+        {{#IsWordAndSentenceCard}}
+        <div lang="ja" class="front-vocab">{{Expression}}</div>
+        <div lang="ja" id="hint">
+            {{#SentenceFurigana}} {{kanji:SentenceFurigana}} {{/SentenceFurigana}}
+            {{^SentenceFurigana}} {{kanji:Sentence}} {{/SentenceFurigana}}
+        </div>
+        {{/IsWordAndSentenceCard}}
 
-  <!-------- Click card ----------->
-  {{#IsClickCard}}
-  <div id="click" class="tappable">
-    <div lang="ja" class="front-vocab">{{Expression}}</div>
-  </div>
-  {{/IsClickCard}}
+        <!-------- Click card ----------->
+        {{#IsClickCard}}
+        <div id="click" class="tappable">
+            <div lang="ja" class="front-vocab">{{Expression}}</div>
+        </div>
+        {{/IsClickCard}}
 
-  <!-------- Audio card ----------->
-  {{#IsAudioCard}}
-  <div id="audio">
-    <div lang="ja" class="front-sentence">{{Sentence}}</div>
-    <div>
-      {{#SentenceAudio}}{{SentenceAudio}}{{/SentenceAudio}}
-      {{^SentenceAudio}}{{ExpressionAudio}}{{/SentenceAudio}}
+        <!-------- Audio card ----------->
+        {{#IsAudioCard}}
+        <div id="audio">
+            <div lang="ja" class="front-sentence">{{Sentence}}</div>
+            <div>
+                {{#SentenceAudio}}{{SentenceAudio}}{{/SentenceAudio}}
+                {{^SentenceAudio}}{{ExpressionAudio}}{{/SentenceAudio}}
+            </div>
+        </div>
+        {{/IsAudioCard}}
+
+        <!-- Hint -->
+        {{#Hint}}
+        <div id="hint">{{Hint}}</div>
+        {{/Hint}}
     </div>
-  </div>
-  {{/IsAudioCard}}
 
-  <!-- Hint -->
-  {{#Hint}}
-  <div id="hint">{{Hint}}</div>
-  {{/Hint}}
+    <div id="settings-menu">
+        <button id="settings-button" aria-label="設定メニュー">☰</button>
+        <div id="settings-panel">
+            <div class="settings-item" id="transparency-setting">
+                <label for="transparency-level">透明度:</label>
+                <input type="range" id="transparency-level" min="0.1" max="1" step="0.1" value="1">
+                <span id="transparency-value">100%</span>
+            </div>
+
+            <div class="settings-item">
+                <label for="term-font">表記フォント:</label>
+                <select id="term-font">
+                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                    <option value="Yu Mincho Pr6N">游明朝体</option>
+                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                </select>
+            </div>
+
+            <div class="settings-item">
+                <label for="reading-font">読みフォント:</label>
+                <select id="reading-font">
+                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                    <option value="Yu Mincho Pr6N">游明朝体</option>
+                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                </select>
+            </div>
+
+            <div class="settings-item">
+                <label for="sentence-font">例文フォント:</label>
+                <select id="sentence-font">
+                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                    <option value="Yu Mincho Pr6N">游明朝体</option>
+                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                </select>
+            </div>
+
+            <div class="settings-item">
+                <label for="dictionary-font">辞書フォント:</label>
+                <select id="dictionary-font">
+                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                    <option value="Yu Mincho Pr6N">游明朝体</option>
+                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                </select>
+            </div>
+        </div>
+    </div>
 </main>
 
 <script>
-  function ClickCard() {
-    const clickElement = document.getElementById("click");
+    // ============================================================================
+    // LAPIS ANKI TEMPLATE - Base
+    // ============================================================================
+    function ClickCard() {
+        const clickElement = document.getElementById("click");
 
-    // Store original content so that we can click back to it
-    const originalContent = clickElement.innerHTML;
+        // Store original content so that we can click back to it
+        const originalContent = clickElement.innerHTML;
 
-    // This is what it is going to click to
-    const clickedContent = `
+        // This is what it is going to click to
+        const clickedContent = `
             <div lang="ja" class="front-sentence">
             {{#SentenceFurigana}} {{kanji:SentenceFurigana}} {{/SentenceFurigana}}
             {{^SentenceFurigana}} {{kanji:Sentence}} {{/SentenceFurigana}}
             </div>
         `;
 
-    function toggleContent() {
-      if (clickElement.innerHTML === originalContent) {
-        clickElement.innerHTML = clickedContent;
-      } else {
-        clickElement.innerHTML = originalContent;
-      }
+        function toggleContent() {
+            if (clickElement.innerHTML === originalContent) {
+                clickElement.innerHTML = clickedContent;
+            } else {
+                clickElement.innerHTML = originalContent;
+            }
+        }
+
+        // Implement the clicking mechanism
+        clickElement.addEventListener("click", (e) => toggleContent());
+        document.addEventListener("keydown", (e) => {
+            if ((event.key === "c") | (event.key === "C")) toggleContent();
+        });
     }
-    // Implement the clicking mechanism
-    clickElement.addEventListener("click", (e) => toggleContent());
-    document.addEventListener("keydown", (e) => {
-      if ((event.key === "c") | (event.key === "C")) toggleContent();
-    });
-  }
 
-  function HideTargetWord() {
-    const targetWords = document.querySelectorAll("#audio b");
-    targetWords.forEach((word) => (word.innerText = "[...]"));
-  }
+    function HideTargetWord() {
+        const targetWords = document.querySelectorAll("#audio b");
+        targetWords.forEach((word) => (word.innerText = "[...]"));
+    }
 
-  function initialize() {
-    // Check what card type it is
-    if (`{{IsClickCard}}`) ClickCard();
-    if (`{{IsAudioCard}}`) HideTargetWord();
-  }
+    function initializeLapisBase() {
+        // Check what card type it is
+        if (`{{IsClickCard}}`) ClickCard();
+        if (`{{IsAudioCard}}`) HideTargetWord();
+    }
 
-  initialize();
+
+    // ============================================================================
+    // LAPIS ANKI TEMPLATE - Extended features
+    // ============================================================================
+    // Prevent event bubbling for all touch/click events on settings
+    function preventBubbling(e) {
+        e.stopPropagation();
+    }
+
+    window.cardContext = {
+        initialized: false,
+        settingsListenersAttached: false,
+        isNarrow: false,
+
+        elements: new Map(),
+
+        fontConfigs: [
+            {
+                element: 'termFont',
+                cssVar: '--font-serif',
+                storageKey: 'lapisTermFont',
+                defaultFont: 'Hiragino Mincho ProN'
+            },
+            {
+                element: 'readingFont',
+                cssVar: '--font-sans',
+                storageKey: 'lapisReadingFont',
+                defaultFont: 'Hiragino Kaku Gothic ProN'
+            },
+            {
+                element: 'sentenceFont',
+                cssVar: '--sentence-font',
+                storageKey: 'lapisSentenceFont',
+                defaultFont: 'Hiragino Mincho ProN'
+            },
+            {
+                element: 'dictionaryFont',
+                cssVar: '--dictionary-font',
+                storageKey: 'lapisDictionaryFont',
+                defaultFont: 'Hiragino Mincho ProN'
+            }
+        ],
+
+        cacheElements() {
+            const selectors = {
+                lapisCard: {selector: ".lapis-card"},
+                settingsPanel: {selector: "#settings-panel"},
+                settingsButton: {selector: "#settings-button"},
+                termFont: {selector: "#term-font"},
+                readingFont: {selector: "#reading-font"},
+                sentenceFont: {selector: "#sentence-font"},
+                dictionaryFont: {selector: "#dictionary-font"},
+                transparencySetting: {selector: "#transparency-setting"},
+                transparencySlider: {selector: "#transparency-level"},
+                transparencyValue: {selector: "#transparency-value"}
+            };
+
+            for (const [key, {selector, all}] of Object.entries(selectors)) {
+                this.elements[key] = all ? document.querySelectorAll(selector) : document.querySelector(selector);
+            }
+        },
+
+        detectNarrowMode() {
+            this.isNarrow = window.innerWidth <= 500;
+            return this.isNarrow;
+        },
+
+        applyFontSettings() {
+            const {lapisCard} = this.elements;
+            if (!lapisCard) return;
+
+            const fontConfigs = this.fontConfigs;
+            if (!fontConfigs) return;
+
+            fontConfigs.forEach(config => {
+                const element = window.cardContext.elements[config.element];
+                if (element) {
+                    const savedFont = localStorage.getItem(config.storageKey) || config.defaultFont;
+                    lapisCard.style.setProperty(config.cssVar, savedFont);
+                    element.value = savedFont;
+                }
+            });
+        },
+
+        init() {
+            if (this.initialized) return;
+
+            this.cacheElements();
+            this.detectNarrowMode();
+            this.applyFontSettings();
+
+            this.initialized = true;
+        }
+    }
+
+
+    function setupTransparencyListeners() {
+        const transparencySlider = window.cardContext.elements.transparencySlider;
+        if (!transparencySlider) return;
+
+        function loadSavedTransparentSetting() {
+            const {lapisCard, transparencyValue, transparencySlider} = window.cardContext.elements;
+            if (!lapisCard || !transparencyValue || !transparencySlider) return;
+
+            const savedTransparencyValue = localStorage.getItem("lapisTransparency");
+            if (savedTransparencyValue) {
+                lapisCard.style.setProperty('--transparency-level', savedTransparencyValue);
+                transparencySlider.value = savedTransparencyValue
+                transparencyValue.textContent = Math.round(savedTransparencyValue * 100) + '%';
+            }
+        }
+
+        function handleTransparencyChange(transparency) {
+            const lapisCard = window.cardContext.elements.lapisCard;
+            if (!lapisCard) return;
+
+            lapisCard.style.setProperty('--transparency-level', transparency);
+            localStorage.setItem("lapisTransparency", transparency);
+
+            // Update display value
+            const transparencyValue = window.cardContext.elements.transparencyValue;
+            if (transparencyValue) {
+                transparencyValue.textContent = Math.round(transparency * 100) + '%';
+            }
+        }
+
+        // Set initial values
+        loadSavedTransparentSetting();
+
+        transparencySlider.addEventListener('input', (e) => {
+            preventBubbling(e);
+            handleTransparencyChange(e.target.value);
+        });
+    }
+
+
+    function setupFontListeners() {
+        const {lapisCard} = window.cardContext.elements;
+
+        const fontConfigs = window.cardContext.fontConfigs;
+
+        window.cardContext.applyFontSettings();
+
+        fontConfigs.forEach(config => {
+            const element = window.cardContext.elements[config.element];
+            if (element) {
+                element.addEventListener('change', (e) => {
+                    preventBubbling(e);
+                    lapisCard.style.setProperty(config.cssVar, e.target.value);
+                    localStorage.setItem(config.storageKey, e.target.value);
+                });
+                element.addEventListener('click', preventBubbling);
+            }
+        });
+    }
+
+
+    function setupSettingsPanelListeners() {
+        const {settingsPanel, settingsButton} = window.cardContext.elements;
+        if (!settingsPanel || !settingsButton) return;
+
+        // Settings button event listeners
+        settingsButton.addEventListener('click', (e) => {
+            preventBubbling(e);
+            settingsPanel.style.display = 'block';
+        });
+
+        // Prevent bubbling on the entire settings panel
+        settingsPanel.addEventListener('click', preventBubbling);
+
+        // Close panel when clicking/touching outside
+        document.addEventListener('click', (e) => {
+            if (!settingsPanel.contains(e.target) && !settingsButton.contains(e.target)) {
+                settingsPanel.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('touchstart', (e) => {
+            if (!settingsPanel.contains(e.target) && !settingsButton.contains(e.target)) {
+                settingsPanel.style.display = 'none';
+            }
+        }, {passive: true});
+    }
+
+
+    function setupGlobalEventListeners() {
+        function setupSettingsListeners() {
+            setupSettingsPanelListeners();
+            setupFontListeners();
+            setupTransparencyListeners();
+            window.cardContext.settingsListenersAttached = true;
+        }
+
+        // Window resize
+        window.addEventListener("resize", function () {
+            window.cardContext.detectNarrowMode()
+
+            if (!window.cardContext.isNarrow && !window.cardContext.settingsListenersAttached) {
+                setupSettingsListeners();
+            }
+
+        }, {passive: true});
+
+
+        // Only set event listeners for settings if not in narrow mode
+        if (!window.cardContext.isNarrow && !window.cardContext.settingsListenersAttached) {
+            setupSettingsListeners();
+        }
+    }
+
+    function initialize() {
+        initializeLapisBase();
+
+        if (!window.cardContext || window.cardContext.initialized) return;
+        window.cardContext.init();
+
+        requestAnimationFrame(() => {
+            setupGlobalEventListeners();
+        });
+    }
+
+    initialize();
+
 </script>

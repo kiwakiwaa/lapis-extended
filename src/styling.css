@@ -1,850 +1,1129 @@
+@font-face {
+    font-family: "Hiragino Mincho ProN";
+    src: url("_Hiragino_Mincho_ProN.ttf") format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Hiragino Kaku Gothic ProN";
+    src: url("_Hiragino_Kaku_Gothic_ProN.ttf") format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Hiragino Maru Gothic ProN";
+    src: url("_Hiragino_Maru_Gothic_ProN.ttf") format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "DFGyoSho Pro-5";
+    src: url("_DFGyoSho_Pro_5.otf") format('opentype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "DFGiHi Pro-5";
+    src: url("_DFGiHi_Pro_5.otf") format('opentype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Yu Mincho Pr6N";
+    src: url("_Yu_Mincho_Pr6N.otf") format('opentype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "FOT-TsukuOldMinPro";
+    src: url("_FOT_TsukuOldMinPro_R.otf") format('opentype');
+    font-display: swap;
+}
+
+
 :root {
-  /* Color theme */
-  --light-mode-bg-color: #fffaf0;
-  --light-mode-fg-color: #333333;
+    /* iOS background image (no addon support for iOS) */
+    --background-image: url("_kanken_background.png");
+    --background-opacity: 0.6; /* Opacity (0.0 to 1.0) */
+    --background-blur: 0px; /* Optional blur effect */
 
-  /* Bold color */
-  --light-mode-bold: #4660f1;
-  --dark-mode-bold: #fffd9e;
+    /* Color theme */
+    --light-mode-bg-color: #fffaf0;
+    --light-mode-fg-color: #333333;
 
-  /* PC Font sizes */
-  --pc-main-font-size: 16px;
-  --pc-main-def-size: 20px;
-  --pc-vocab-font-size: 85px;
-  --pc-back-vocab-font-size: 60px;
-  --pc-sentence-font-size: 52px;
-  --pc-back-sentence-font-size: 35px;
-  --pc-hint-font-size: 38px;
-  --pc-info-font-size: 23px;
+    /* Bold color */
+    --light-mode-bold: #4660f1;
+    --dark-mode-bold: #fffd9e;
 
-  /* Mobile font sizes */
-  --mobile-main-font-size: 16px;
-  --mobile-main-def-size: 16px;
-  --mobile-vocab-font-size: 70px;
-  --mobile-back-vocab-font-size: 32px;
-  --mobile-sentence-font-size: 38px;
-  --mobile-back-sentence-font-size: 24px;
-  --mobile-hint-font-size: 24px;
-  --mobile-info-font-size: 16px;
+    /* PC Font sizes */
+    --pc-main-font-size: 16px;
+    --pc-main-def-size: 20px;
+    --pc-vocab-font-size: 85px;
+    --pc-back-vocab-font-size: 60px;
+    --pc-sentence-font-size: 52px;
+    --pc-back-sentence-font-size: 35px;
+    --pc-hint-font-size: 30px;
+    --pc-info-font-size: 23px;
 
-  /* Miscellaneous */
-  --font-serif: "Hiragino Mincho ProN", "Noto Serif CJK JP", "Yu Mincho", HanaMinA, HanaMinB, serif;
-  --font-sans: "Inter", "SF Pro Display", "Liberation Sans", "Segoe UI", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", "Meiryo", HanaMinA, HanaMinB, sans-serif;
-  --light-mode-image-brightness: 85%;
-  --dark-mode-image-brightness: 80%;
-  --light-mode-tooltip-hover-color: rgb(256, 256, 256, 0.9);
-  --dark-mode-tooltip-hover-color: rgba(0, 0, 0, 0.9);
-  --def-picture-size: 200px;
-  --max-width: 800px;
+    /* Mobile font sizes */
+    --mobile-main-font-size: 16px;
+    --mobile-main-def-size: 16px;
+    --mobile-vocab-font-size: 70px;
+    --mobile-back-vocab-font-size: 32px;
+    --mobile-sentence-font-size: 38px;
+    --mobile-back-sentence-font-size: 24px;
+    --mobile-hint-font-size: 24px;
+    --mobile-info-font-size: 16px;
 
-  /* See https://github.com/donkuri/lapis/tree/main/docs/user_settings.md for an overview of these variables */
-  --main-picture-position: "right"; /* "right", "left" */
-  --sentence-furigana: "hover"; /* "hover", "always", "off" */
-  --sentence-position: "above"; /* "above", "below" the definition box*/
-  --mobile-sentence-position: "below";
-  --mobile-audio-buttons: "default"; /* "default", "header" (inside vocabulary box) */
-  --nsfw-blur-contained: "off"; /* "on", "off" */
-  --open-misc-info: "off"; /* "on", "off" */
-  --glossary-separator: "off"; /* "on" to separate dictionaries in definition box */
-  --jitendex-format: "full"; /* "minimal" or space-separated list of "no-tags", "no-sentence", "no-forms", "no-xref", "no-img" */
+    /* Miscellaneous */
+    --font-serif: "Hiragino Mincho ProN", "Noto Serif CJK JP", "Yu Mincho", HanaMinA, HanaMinB, serif;
+    --font-sans: "Inter", "SF Pro Display", "Liberation Sans", "Segoe UI", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", "Meiryo", HanaMinA, HanaMinB, sans-serif;
+    --sentence-font: "Hiragino Mincho ProN", "Noto Serif CJK JP", "Yu Mincho", HanaMinA, HanaMinB, serif;
+    --dictionary-font: "Hiragino Mincho ProN", "Noto Serif CJK JP", "Yu Mincho", HanaMinA, HanaMinB, serif;
+    --light-mode-image-brightness: 85%;
+    --dark-mode-image-brightness: 80%;
+    --light-mode-tooltip-hover-color: rgb(256, 256, 256, 0.9);
+    --dark-mode-tooltip-hover-color: rgba(0, 0, 0, 0.9);
+    --def-picture-size: 200px;
+    --max-width: 800px;
 
-  /* Pitch colors */
-  --dark-mode-heiban: #39bae6;
-  --dark-mode-atamadaka: #ec464f;
-  --dark-mode-nakadaka: #ff8f40;
-  --dark-mode-odaka: #6cbf43;
-  --dark-mode-kifuku: #af85f4;
-  --light-mode-heiban: #1aa0ce;
-  --light-mode-atamadaka: #e92a35;
-  --light-mode-nakadaka: #ff6b03;
-  --light-mode-odaka: #61ad3b;
-  --light-mode-kifuku: #7e53c4;
+    /* See https://github.com/donkuri/lapis/tree/main/docs/user_settings.md for an overview of these variables */
+    --main-picture-position: "right"; /* "right", "left" */
+    --sentence-furigana: "hover"; /* "hover", "always", "off" */
+    --sentence-position: "above"; /* "above", "below" the definition box*/
+    --mobile-sentence-position: "below";
+    --mobile-audio-buttons: "default"; /* "default", "header" (inside vocabulary box) */
+    --nsfw-blur-contained: "off"; /* "on", "off" */
+    --open-misc-info: "off"; /* "on", "off" */
+    --glossary-separator: "off"; /* "on" to separate dictionaries in definition box */
+    --jitendex-format: "full"; /* "minimal" or space-separated list of "no-tags", "no-sentence", "no-forms", "no-xref", "no-img" */
 
-  font-size: var(--main-font-size);
+    /* Pitch colors */
+    --dark-mode-heiban: #39bae6;
+    --dark-mode-atamadaka: #ec464f;
+    --dark-mode-nakadaka: #ff8f40;
+    --dark-mode-odaka: #6cbf43;
+    --dark-mode-kifuku: #af85f4;
+    --light-mode-heiban: #1aa0ce;
+    --light-mode-atamadaka: #e92a35;
+    --light-mode-nakadaka: #ff6b03;
+    --light-mode-odaka: #61ad3b;
+    --light-mode-kifuku: #7e53c4;
+
+    font-size: var(--main-font-size);
+
+    /* Dictionary border colours */
+    --general-dict-border-color: #e8e8e8;
+    --obunsha-kokugo-border-color: rgb(196, 237, 248);
+    --rgko12-border-color: rgb(255, 210, 0);
+    --meikyo-border-color: rgb(173, 197, 208);
+    --skogo-border-color: rgb(239, 214, 254);
+    --obunsha-kogo-border-color: rgb(177, 228, 230);
+    --nanmed-border-color: rgb(181, 113, 116);
+    --tismkanji-border-color: rgb(227, 227, 227);
+    --yoji-hyakka-border-color: rgb(187, 243, 196);
+
+    --pixiv-border-color: rgb(185, 230, 251);
+    --shinjigen-border-color: rgb(250, 237, 204);
+    --daijisen-border-color: rgb(184, 124, 126);
+    --kanken-border-color: rgb(242, 228, 185);
+    --smk8-border-color: rgb(220, 145, 161);
+    --daijirin-border-color: rgb(200, 168, 211);
+    --seisenban-border-color: rgb(243, 216, 181);
+    --koujien-border-color: rgb(81, 81, 81);
+    --yoji-yoji: rgb(248, 196, 154);
+    --gakken-yoji: rgb(244, 242, 197);
+
+    --ydl-border-image: linear-gradient(to right,
+    rgb(0, 52, 159),
+    rgb(138, 206, 255),
+    rgb(255, 255, 255));
+    --shinrigaku-border-image: linear-gradient(to right,
+    #e15286,
+    #ff9e2c,
+    #9ed39e,
+    #7ad1d1);
+    --kanjidego-border-image: linear-gradient(to right,
+    rgb(143, 187, 154),
+    rgb(247, 235, 140));
 }
 
 .card {
-  background-color: var(--bg-color) !important;
-  color: var(--fg-color) !important;
+    background-color: var(--bg-color) !important;
+    color: var(--fg-color) !important;
 }
 
 .card.nightMode {
-  --bg-color: var(--canvas, #2c2c2c);
-  --fg-color: var(--fg, #fcfcfc);
-  --heiban: var(--dark-mode-heiban, initial);
-  --atamadaka: var(--dark-mode-atamadaka, initial);
-  --nakadaka: var(--dark-mode-nakadaka, initial);
-  --odaka: var(--dark-mode-odaka, initial);
-  --kifuku: var(--dark-mode-kifuku, initial);
+    --bg-color: var(--canvas, #2c2c2c);
+    --fg-color: var(--fg, #fcfcfc);
+    --heiban: var(--dark-mode-heiban, initial);
+    --atamadaka: var(--dark-mode-atamadaka, initial);
+    --nakadaka: var(--dark-mode-nakadaka, initial);
+    --odaka: var(--dark-mode-odaka, initial);
+    --kifuku: var(--dark-mode-kifuku, initial);
 
-  --bg-elevated: rgba(0, 0, 0, 0.12);
-  --bg-inset: rgba(255, 255, 255, 0.03);
-  --fg-subtle: rgba(255, 255, 255, 0.3);
-  --bold: var(--dark-mode-bold, #7d8590);
+    --bg-elevated: rgba(0, 0, 0, 0.12);
+    --bg-inset: rgba(255, 255, 255, 0.03);
+    --fg-subtle: rgba(255, 255, 255, 0.3);
+    --bold: var(--dark-mode-bold, #7d8590);
 
-  --image-brightness: var(--dark-mode-image-brightness);
-  --tooltip-hover-color: var(--dark-mode-tooltip-hover-color);
+    --image-brightness: var(--dark-mode-image-brightness);
+    --tooltip-hover-color: var(--dark-mode-tooltip-hover-color);
 
-  /* Code for 明鏡 第三版 by kiwakiwaa
-    and can be found here https://github.com/kiwakiwaa/vertical-cards?tab=readme-ov-file#my-yomitan-dictionaries */
-  --meikyo-white: #000000;
-  --meikyo-black: #cccccc;
-  --meikyo-blue: #33ccff;
-  --meikyo-red: #ff3333;
-  --meikyo-gray: #bbbbbb;
-  --meikyo-pink: #cc6666;
-  --meikyo-dark-red: #993333;
-  --meikyo-fbox-white: #ffffff;
-  --meikyo-fbox-gray: #cccccc;
-  --meikyo-box-gray: #663333;
-  /* Support for oubunsha kogo */
-  --ozk5-blue: #00aaff;
-  --ozk5-red: #ff6666;
-  --ozk5-light-red: #b24747;
-  --ozk5-gray: #888;
-  --ozk5-hinshi-mark: #cccccc;
-  --ozk5-kakomi-border: #888;
-  --ozk5-metadata-background: #888;
-  --ozk5-example-katsuyou-mark: #aaaaaa;
-  --ozk5-mark-border: #acac04;
-  --ozk5-gogi-panel-header: #331414;
-  --ozk5-ruigo-panel-background: #cccccc;
-  --ozk5-ruigo-panel-border: #777;
-  --ozk5-appendix-title-background: #bf6666;
-  --ozk5-gendai-mark: #cccccc;
-  /* --background-color: #1e1e1e; */
+    /* Colours for 明鏡 第三版 by kiwakiwaa
+      and can be found here https://github.com/kiwakiwaa/vertical-cards?tab=readme-ov-file#my-yomitan-dictionaries */
+    --meikyo-white: #000000;
+    --meikyo-black: #cccccc;
+    --meikyo-blue: #33ccff;
+    --meikyo-red: #ff3333;
+    --meikyo-gray: #bbbbbb;
+    --meikyo-pink: #cc6666;
+    --meikyo-dark-red: #993333;
+    --meikyo-fbox-white: #ffffff;
+    --meikyo-fbox-gray: #cccccc;
+    --meikyo-box-gray: #663333;
 
-  /* Support for sanseido kogo */
-  --skogo-blue: #00aaff;
-  --skogo-red: #ff6666;
-  --skogo-light-red: #a54447;
-  --skogo-extra-light-red: #481d1e;
-  --skogo-hinshi-mark: #cccccc;
-  --skogo-shubetsu-mark: #cccccc;
-  --skogo-gendai-mark: #cccccc;
+    /* 旺文社古語 colours */
+    --ozk5-blue: #00aaff;
+    --ozk5-red: #ff6666;
+    --ozk5-light-red: #b24747;
+    --ozk5-gray: #888;
+    --ozk5-hinshi-mark: #cccccc;
+    --ozk5-kakomi-border: #888;
+    --ozk5-metadata-background: #888;
+    --ozk5-example-katsuyou-mark: #aaaaaa;
+    --ozk5-mark-border: #acac04;
+    --ozk5-gogi-panel-header: #331414;
+    --ozk5-ruigo-panel-background: #cccccc;
+    --ozk5-ruigo-panel-border: #777;
+    --ozk5-appendix-title-background: #bf6666;
+    --ozk5-gendai-mark: #cccccc;
+    /* --background-color: #1e1e1e; */
+
+    /* 三省堂古語 colours */
+    --skogo-blue: #00aaff;
+    --skogo-red: #ff6666;
+    --skogo-light-red: #a54447;
+    --skogo-extra-light-red: #481d1e;
+    --skogo-hinshi-mark: #cccccc;
+    --skogo-shubetsu-mark: #cccccc;
+    --skogo-gendai-mark: #cccccc;
+
+    /* 南山堂医学大辞典 colours */
+    --nanmed-red: #d66;
+    --nanmed-link-color: #abc7e5;
+    --nanmed-midashi-border: #555;
+    --nanmed-light-text-color: #aaa;
+    --nanmed-border-color: #555;
+
+    /* Dictionary border colours */
+    --general-dict-border-color: #444;
+    --obunsha-kokugo-border-color: rgb(83, 186, 214);
+    --rgko12-border-color: rgb(255, 227, 113);
+    --meikyo-border-color: rgb(58, 77, 142);
+    --skogo-border-color: rgb(183, 138, 207);
+    --obunsha-kogo-border-color: rgb(111, 184, 186);
+    --nanmed-dict-border-color: rgb(166, 51, 62);
+    --tismkanji-border-color: rgb(227, 227, 227);
+    --yoji-hyakka-border-color: rgb(107, 161, 117);
+
+    --pixiv-border-color: rgb(108, 192, 231);
+    --shinjigen-border-color: rgb(249, 207, 152);
+    --daijisen-border-color: rgb(139, 47, 55);
+    --kanken-border-color: rgb(224, 193, 98);
+    --smk8-border-color: rgb(155, 13, 44);
+    --daijirin-border-color: rgb(117, 81, 129);
+    --seisenban-border-color: rgb(234, 183, 117);
+    --koujien-border-color: rgb(187, 187, 187);
+    --yoji-yoji: rgb(243, 170, 110);
+    --gakken-yoji: rgb(240, 227, 127);
+
+    --shinrigaku-border-image: linear-gradient(to right,
+    #b5446e,
+    #cc7d26,
+    #6ba76b,
+    #4aa3a3);
+    --ydl-border-image: linear-gradient(to right,
+    rgb(0, 52, 159),
+    rgb(138, 206, 255),
+    rgb(255, 255, 255));
+    --kanjidego-border-image: linear-gradient(to right,
+    rgb(100, 161, 116),
+    rgb(234, 223, 126));
 }
 
 .android .nightMode {
-  --bg-color: black;
-  --fg-color: white;
+    --bg-color: black;
+    --fg-color: white;
 }
 
 .android .nightMode:not(.ankidroid_dark_mode) {
-  /* make it brighter since bg is black */
-  --bg-elevated: rgba(255, 255, 255, 0.06);
+    /* make it brighter since bg is black */
+    --bg-elevated: rgba(255, 255, 255, 0.06);
 }
 
 .android .nightMode.ankidroid_dark_mode {
-  --bg-color: #303030;
+    --bg-color: #303030;
 }
 
 .card:not(.nightMode) {
-  --bg-color: var(--light-mode-bg-color);
-  --fg-color: var(--light-mode-fg-color);
-  --heiban: var(--light-mode-heiban, initial);
-  --atamadaka: var(--light-mode-atamadaka, initial);
-  --nakadaka: var(--light-mode-nakadaka, initial);
-  --odaka: var(--light-mode-odaka, initial);
-  --kifuku: var(--light-mode-kifuku, initial);
+    --bg-color: var(--light-mode-bg-color);
+    --fg-color: var(--light-mode-fg-color);
+    --heiban: var(--light-mode-heiban, initial);
+    --atamadaka: var(--light-mode-atamadaka, initial);
+    --nakadaka: var(--light-mode-nakadaka, initial);
+    --odaka: var(--light-mode-odaka, initial);
+    --kifuku: var(--light-mode-kifuku, initial);
 
-  --bg-elevated: rgba(0, 0, 0, 0.03);
-  --bg-inset: rgba(0, 0, 0, 0.06);
-  --fg-subtle: rgba(0, 0, 0, 0.6);
-  --bold: var(--light-mode-bold, #999999);
+    --bg-elevated: rgba(0, 0, 0, 0.03);
+    --bg-inset: rgba(0, 0, 0, 0.06);
+    --fg-subtle: rgba(0, 0, 0, 0.6);
+    --bold: var(--light-mode-bold, #999999);
 
-  --image-brightness: var(--light-mode-image-brightness);
-  --tooltip-hover-color: var(--light-mode-tooltip-hover-color);
+    --image-brightness: var(--light-mode-image-brightness);
+    --tooltip-hover-color: var(--light-mode-tooltip-hover-color);
 
-  /* Code for 大辞泉 二版 by kiwakiwaa
-    and can be found here https://github.com/kiwakiwaa/vertical-cards?tab=readme-ov-file#my-yomitan-dictionaries */
-  --daijisen-black: #ffffff;
-  --daijisen-white: #000000;
-  --daijisen-blue: #00aaff;
-  --daijisen-header-djs: #a0484f;
-  --daijisen-header-djsp: #7a7a7a;
-  --daijisen-header-text: #000000;
-  --daijisen-logo-color: #dddddd;
-  --daijisen-background-l3: #c0c0c0;
-  --daijisen-accent-mark: #ff6666;
-  --daijisen-accent-slash: #a0a0a0;
+    /* Colours for 大辞泉 二版 by kiwakiwaa
+      and can be found here https://github.com/kiwakiwaa/vertical-cards?tab=readme-ov-file#my-yomitan-dictionaries */
+    --daijisen-black: #ffffff;
+    --daijisen-white: #000000;
+    --daijisen-blue: #00aaff;
+    --daijisen-header-djs: #a0484f;
+    --daijisen-header-djsp: #7a7a7a;
+    --daijisen-header-text: #000000;
+    --daijisen-logo-color: #dddddd;
+    --daijisen-background-l3: #c0c0c0;
+    --daijisen-accent-mark: #ff6666;
+    --daijisen-accent-slash: #a0a0a0;
 
-  --ozk5-blue: #4a8ade;
-  --ozk5-red: #c00000;
-  --ozk5-light-red: #d96666;
-  --ozk5-gray: #888;
-  --ozk5-hinshi-mark: #444;
-  --ozk5-kakomi-border: #999;
-  --ozk5-metadata-background: #999;
-  --ozk5-example-katsuyou-mark: #666;
-  --ozk5-mark-border: #660;
-  --ozk5-gogi-panel-header: #f9e6e6;
-  --ozk5-ruigo-panel-background: #444;
-  --ozk5-ruigo-panel-border: #aaa;
-  --ozk5-appendix-title-background: #633;
-  --ozk5-gendai-mark: #888;
-  /* --background-color: #f5f5f5; */
+    --ozk5-blue: #4a8ade;
+    --ozk5-red: #c00000;
+    --ozk5-light-red: #d96666;
+    --ozk5-gray: #888;
+    --ozk5-hinshi-mark: #444;
+    --ozk5-kakomi-border: #999;
+    --ozk5-metadata-background: #999;
+    --ozk5-example-katsuyou-mark: #666;
+    --ozk5-mark-border: #660;
+    --ozk5-gogi-panel-header: #f9e6e6;
+    --ozk5-ruigo-panel-background: #444;
+    --ozk5-ruigo-panel-border: #aaa;
+    --ozk5-appendix-title-background: #633;
+    --ozk5-gendai-mark: #888;
+    /* --background-color: #f5f5f5; */
 
-  --skogo-blue: #4a8ade;
-  --skogo-red: #c00000;
-  --skogo-light-red: #dfa6a8;
-  --skogo-extra-light-red: #ffeeee;
-  --skogo-hinshi-mark: #444;
-  --skogo-shubetsu-mark: #707070;
-  --skogo-gendai-mark: #888;
+    --skogo-blue: #4a8ade;
+    --skogo-red: #c00000;
+    --skogo-light-red: #dfa6a8;
+    --skogo-extra-light-red: #ffeeee;
+    --skogo-hinshi-mark: #444;
+    --skogo-shubetsu-mark: #707070;
+    --skogo-gendai-mark: #888;
 }
 
 html.win,
 html.mac,
 html.linux:not(.android) {
-  --main-font-size: var(--pc-main-font-size);
-  --main-def-size: var(--pc-main-def-size);
-  --vocab-font-size: var(--pc-vocab-font-size);
-  --back-vocab-font-size: var(--pc-back-vocab-font-size);
-  --sentence-font-size: var(--pc-sentence-font-size);
-  --back-sentence-font-size: var(--pc-back-sentence-font-size);
-  --hint-font-size: var(--pc-hint-font-size);
-  --info-font-size: var(--pc-info-font-size);
+    --main-font-size: var(--pc-main-font-size);
+    --main-def-size: var(--pc-main-def-size);
+    --vocab-font-size: var(--pc-vocab-font-size);
+    --back-vocab-font-size: var(--pc-back-vocab-font-size);
+    --sentence-font-size: var(--pc-sentence-font-size);
+    --back-sentence-font-size: var(--pc-back-sentence-font-size);
+    --hint-font-size: var(--pc-hint-font-size);
+    --info-font-size: var(--pc-info-font-size);
 }
 
 html.mobile {
-  --main-font-size: var(--mobile-main-font-size);
-  --main-def-size: var(--mobile-main-def-size);
-  --vocab-font-size: var(--mobile-vocab-font-size);
-  --back-vocab-font-size: var(--mobile-back-vocab-font-size);
-  --sentence-font-size: var(--mobile-sentence-font-size);
-  --back-sentence-font-size: var(--mobile-back-sentence-font-size);
-  --hint-font-size: var(--mobile-hint-font-size);
-  --info-font-size: var(--mobile-info-font-size);
+    --main-font-size: var(--mobile-main-font-size);
+    --main-def-size: var(--mobile-main-def-size);
+    --vocab-font-size: var(--mobile-vocab-font-size);
+    --back-vocab-font-size: var(--mobile-back-vocab-font-size);
+    --sentence-font-size: var(--mobile-sentence-font-size);
+    --back-sentence-font-size: var(--mobile-back-sentence-font-size);
+    --hint-font-size: var(--mobile-hint-font-size);
+    --info-font-size: var(--mobile-info-font-size);
 }
 
 #qa {
-  display: flex;
-  align-items: stretch;
-  flex-direction: column;
-  min-height: calc(100vh - 40px);
-  font-family: var(--font-serif);
-  font-size: var(--main-font-size);
-  text-align: center;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    min-height: calc(100vh - 40px);
+    font-family: var(--font-serif), serif;
+    font-size: var(--main-font-size);
+    text-align: center;
 }
 
 /* ------- Mobile css ------- */
 @media (max-width: 512px) {
-  .images-container {
-    justify-content: space-around;
-    flex-direction: row !important;
-    max-width: 100% !important;
-    width: 100%;
-    flex-wrap: wrap;
-  }
+    .images-container {
+        justify-content: space-around;
+        flex-direction: row !important;
+        max-width: 100% !important;
+        width: 100%;
+        flex-wrap: wrap;
+    }
 
-  .images-container img {
-    width: 44%;
-  }
+    .images-container img {
+        width: 44%;
+    }
 
-  .img-popup-container {
-    max-width: 100vw;
-    max-height: 60vh;
-  }
+    .img-popup-container {
+        max-width: 100vw;
+        max-height: 60vh;
+    }
 
-  .img-popup-img {
-    object-fit: contain;
-  }
+    .img-popup-img {
+        object-fit: contain;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  .img-popup-container {
-    max-height: 70vh;
-  }
+    .img-popup-container {
+        max-height: 70vh;
+    }
 
-  .img-popup-img {
-    object-fit: contain;
-  }
+    .img-popup-img {
+        object-fit: contain;
+    }
 }
+
+/* ----- Transparent Variables --------- */
+.lapis-card {
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --transparency-level: 1;
+}
+
+.card:not(.nightMode) .lapis-card {
+    --shadow-color: rgba(0, 0, 0, 0.05);
+}
+
+
+/* ----- Settings menu ----- */
+#settings-menu {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+}
+
+#settings-button {
+    background: var(--bg-elevated);
+    border: 1px solid var(--fg-subtle);
+    border-radius: 4px;
+    color: var(--fg-color);
+    font-size: 16px;
+    width: 12px;
+    height: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 16px var(--shadow-color);
+}
+
+#settings-button:hover {
+    background: var(--bg-inset);
+}
+
+#settings-panel {
+    display: none;
+    position: absolute;
+    top: 2rem;
+    left: 0.2rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--fg-subtle);
+    border-radius: 8px;
+    padding: 0.4rem;
+    width: 10rem;
+
+
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    touch-action: manipulation;
+    -webkit-overflow-scrolling: touch;
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px var(--shadow-color),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.settings-header h3 {
+    margin: 0;
+    font-size: 14px;
+    color: var(--fg-color);
+    font-family: var(--font-sans), sans-serif;
+}
+
+#close-settings {
+    background: none;
+    border: none;
+    color: var(--fg-subtle);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.settings-item {
+    margin-bottom: 10px;
+}
+
+.settings-item label {
+    display: block;
+    font-size: 12px;
+    color: var(--fg-subtle);
+    margin-bottom: 4px;
+    font-family: var(--font-sans), sans-serif;
+}
+
+#template-width {
+    width: 100%;
+    margin-bottom: 4px;
+    background: var(--bg-color);
+    color: var(--fg-color);
+    border: 1px solid var(--fg-subtle);
+    border-radius: 3px;
+}
+
+.settings-item span {
+    display: block;
+    text-align: right;
+    font-size: 11px;
+    color: var(--fg-subtle);
+}
+
+.settings-item option {
+    font-family: var(--font-sans), sans-serif;
+    background: var(--bg-color);
+    color: var(--fg-color);
+}
+
+/* Hide settings in narrow mode */
+@media (max-width: 500px) {
+    #settings-menu {
+        display: none !important;
+    }
+}
+
 
 /* ----- Front elements ----- */
 
 .front-vocab {
-  font-size: var(--vocab-font-size);
-  line-height: 1.5;
+    font-family: var(--font-serif), serif;
+    font-size: var(--vocab-font-size);
+    line-height: 1.5;
 }
 
 .front-sentence {
-  font-size: var(--sentence-font-size);
-  display: inline-block;
-  line-height: 1.5;
+    font-size: var(--sentence-font-size);
+    display: inline-block;
+    line-height: 1.5;
 }
 
 #hint {
-  font-size: var(--hint-font-size);
-  margin-top: -5px;
-  line-height: 1.5;
+    font-size: var(--hint-font-size);
+    margin-top: -5px;
+    line-height: 1.5;
 }
 
 #click {
-  user-select: none;
+    user-select: none;
 }
 
 #click .front-vocab {
-  display: inline-block;
-  line-height: 1.2;
-  margin-bottom: 20px;
-  border-bottom: 2px dotted var(--fg-subtle);
+    display: inline-block;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    border-bottom: 2px dotted var(--fg-subtle);
 }
 
 /* ----- Back elements ----- */
 
 /* Vocab on the back (for mobile) */
 .vocab {
-  line-height: 1.5;
-  font-size: var(--back-vocab-font-size);
+    line-height: 1.5;
+    font-family: var(--font-serif), serif;
+    font-size: var(--back-vocab-font-size);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 a {
-  color: #3b82f6 !important;
+    color: #3b82f6 !important;
 }
 
 .nightMode a {
-  color: #93c5fd !important;
+    color: #93c5fd !important;
 }
 
 /* Header */
 header {
-  color: var(--fg-subtle);
-  height: 40px;
-  text-align: right;
-  width: 100%;
-  font-size: 1rem;
+    color: var(--fg-subtle);
+    height: 40px;
+    text-align: right;
+    width: 100%;
+    font-size: 1rem;
 }
 
 .top-container {
-  font-family: var(--font-sans);
-  max-width: calc(var(--max-width) + 20px);
-  margin: 0px auto;
-  width: calc(100% - 20px);
-  fill: var(--fg-subtle) !important;
-  position: relative;
-  display: inline-block;
+    display: none;
+    font-family: var(--font-sans), sans-serif;
+    max-width: calc(var(--max-width) + 20px);
+    margin: 0 auto;
+    width: calc(100% - 20px);
+    fill: var(--fg-subtle) !important;
+    position: relative;
 }
 
 .freq-dropdown {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .freq-list-container {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: var(--tooltip-hover-color);
-  color: var(--fg-color);
-  padding: 10px;
-  border-radius: 5px;
-  z-index: 1000;
-  width: 200px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--tooltip-hover-color);
+    color: var(--fg-color);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    width: 200px;
 }
 
 .freq-list-container ul {
-  list-style-type: none;
-  line-height: 1.5;
-  margin: 0;
-  padding: 0;
+    list-style-type: none;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
 }
 
 .freq-dropdown:hover .freq-list-container {
-  display: block;
+    display: block;
 }
 
 main {
-  width: min(var(--max-width), calc(100% - 20px));
-  margin-inline: auto;
+    width: min(var(--max-width), calc(100% - 20px));
+    margin-inline: auto;
 }
 
 /* Info (audio, reading) */
 .info {
-  font-family: var(--font-sans);
-  font-size: var(--info-font-size);
-  color: var(--fg-color);
+    font-family: var(--font-sans), sans-serif;
+    font-size: var(--info-font-size);
+    color: var(--fg-color);
 }
 
 .mobile .info {
-  font-size: 0.9rem;
-  padding-top: 7px;
+    font-size: 0.9rem;
+    padding-top: 7px;
 }
 
 /* Replay button */
 .replay-button svg {
-  width: 32px;
-  height: 32px;
+    width: 32px;
+    height: 32px;
 }
 
 .mobile .audio-buttons {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 /* Pitch */
 .pitch {
-  display: inline;
+    display: inline;
 }
 
 #pitch-tags {
-  background-color: var(--fg-color);
-  color: var(--bg-color);
-  font-family: var(--font-sans);
-  font-weight: 500;
-  display: none;
-  vertical-align: top;
-  padding: 1px 3px;
-  margin-right: -5px;
+    background-color: var(--fg-color);
+    color: var(--bg-color);
+    font-family: var(--font-sans), sans-serif;
+    font-weight: 500;
+    display: none;
+    vertical-align: top;
+    padding: 1px 3px;
+    margin-right: -5px;
 }
 
 .mobile .nightMode #pitch-tags {
-  color: #000 !important;
-  background-color: #fff;
+    color: #000 !important;
+    background-color: #fff;
 }
 
 /* When multiple pitch */
 .pitch ul,
 #pitch-tags ul {
-  list-style: none;
-  display: inline;
-  margin: 0;
-  padding: 0;
+    list-style: none;
+    display: inline;
+    margin: 0;
+    padding: 0;
 }
 
 .pitch li,
 #pitch-tags li {
-  display: inline;
+    display: inline;
 }
 
 .pitch ul > li:not(:last-child)::after {
-  content: "・";
-  color: var(--fg-color);
+    content: "・";
+    color: var(--fg-color);
 }
 
 #pitch-tags ul > li:not(:last-child)::after {
-  content: "・";
-  color: var(--bg-color);
-  font-size: 0.8em;
+    content: "・";
+    color: var(--bg-color);
+    font-size: 0.8em;
 }
 
 /* Definition container */
 .main-def {
-  background-color: var(--bg-elevated);
-  font-family: var(--font-sans);
-  font-size: var(--main-def-size);
-  line-height: 1.75em;
-  text-align: left;
-  border-left: 5px solid #ccc;
-  padding: 0.5em 10px;
-  margin: 5px auto;
-  overflow: hidden;
-  position: relative;
+    background-color: var(--bg-elevated);
+    font-family: var(--dictionary-font), sans-serif;
+    font-size: var(--main-def-size);
+    line-height: 1.75em;
+    text-align: left;
+    padding: 0.5em 0.75em;
+    margin: 5px auto;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+
+    backdrop-filter: blur(calc(12px * var(--transparency-level)));
+    -webkit-backdrop-filter: blur(calc(12px * var(--transparency-level)));
+    box-shadow: 0 8px 32px var(--shadow-color),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .main-def ol {
-  margin-block: 0em;
+    margin-block: 0;
 }
 
 /* Definition info display */
 .def-info {
-  font-family: var(--font-sans);
-  color: var(--fg-subtle);
-  font-size: 0.9rem;
-  text-align: right;
-  pointer-events: none;
-  visibility: hidden;
+    font-family: var(--font-sans), sans-serif;
+    color: var(--fg-subtle);
+    font-size: 0.9rem;
+    text-align: right;
+    pointer-events: none;
+    visibility: hidden;
 }
 
 .mobile .def-info {
-  margin-bottom: -5px;
+    margin-bottom: -5px;
 }
 
 /* MainDefinition */
 .definition {
-  text-align: left;
-  width: fit-content;
-  max-width: 100%;
+    text-align: left;
+    width: fit-content;
+    max-width: 100%;
+}
+
+/* Disable any links in glossaries */
+#glossaries a,
+.yomitan-glossary a {
+    color: inherit !important;
+    cursor: default !important;
+    pointer-events: none !important;
 }
 
 /* Definition toggle css */
 .edge {
-  position: absolute;
-  top: 0;
-  width: 50px;
-  height: 100%;
-  cursor: pointer;
-  opacity: 0.4;
+    position: absolute;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0.4;
 }
 
 .edge:hover {
-  background-color: var(--bg-inset);
+    background-color: var(--bg-inset);
 }
 
 #edge-prev {
-  left: 0;
-  border-radius: 8px 0px 0px 8px;
+    left: 0;
+    border-radius: 8px 0 0 8px;
 }
 
 #edge-next {
-  right: 0;
-  border-radius: 0px 8px 8px 0px;
+    right: 0;
+    border-radius: 0 8px 8px 0;
 }
 
 /* Hide edges when not needed */
 .edge:has(~ .definition > :last-child:first-child) {
-  display: none;
+    display: none;
 }
 
 /* Primary Image */
 .image img {
-  max-height: 400px;
-  width: auto;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: filter 0.3s;
+    max-height: 400px;
+    width: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: filter 0.3s;
 }
 
 .image img:hover,
 .def-image img:hover {
-  filter: brightness(var(--image-brightness));
+    filter: brightness(var(--image-brightness));
 }
 
 /* Definition Image(s) */
 .def-image {
-  float: right;
-  margin-left: 10px;
-  max-width: min(35%, var(--def-picture-size));
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-  gap: 10px;
+    float: right;
+    margin-left: 10px;
+    max-width: min(35%, var(--def-picture-size));
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    gap: 10px;
 }
 
 .def-image img {
-  object-fit: contain;
-  max-height: var(--def-picture-size);
-  border-radius: 3px;
-  cursor: pointer;
-  transition: filter 0.3s;
+    object-fit: contain;
+    max-height: var(--def-picture-size);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: filter 0.3s;
 }
 
 .def-image ol {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 /* Image modal css */
 .modal-bg {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 1000;
-  cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.3s ease,
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease,
     visibility 0.3s ease;
 }
 
 .modal-bg.active {
-  opacity: 1;
-  visibility: visible;
+    opacity: 1;
+    visibility: visible;
 }
 
 .img-popup-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(calc(100% - 20px), calc(var(--max-width) + 200px));
-  z-index: 1001;
-  overflow: hidden;
-  display: flex;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.3s ease,
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(calc(100% - 20px), calc(var(--max-width) + 200px));
+    z-index: 1001;
+    overflow: hidden;
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease,
     visibility 0.3s ease;
 }
 
 .img-popup-container.active {
-  opacity: 1;
-  visibility: visible;
+    opacity: 1;
+    visibility: visible;
 }
 
 .img-popup-img {
-  width: auto;
-  height: auto;
-  margin: 0 auto;
-  transition: transform 0.3s ease;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    transition: transform 0.3s ease;
 }
 
 /* Hide NFSW Images -- make sure you use the tag `NSFW` EXACTLY */
 .NSFW img,
 .nsfw img,
 .Nsfw img {
-  filter: blur(30px);
-  transition: filter 0.2s;
+    filter: blur(30px);
+    transition: filter 0.2s;
 
-  &:hover {
-    filter: blur(0px);
-  }
+    &:hover {
+        filter: blur(0px);
+    }
 }
 
 /* Back sentence */
 .sentence,
 .sentence-mobile {
-  line-height: 1.5;
-  font-size: var(--back-sentence-font-size);
-  display: inline-block;
+    line-height: 1.5;
+    font-family: var(--sentence-font);
+    font-size: var(--back-sentence-font-size);
+    display: inline-block;
 
-  /* show furigana on hover */
-  & rt {
-    visibility: hidden;
-  }
+    /* show furigana on hover */
 
-  & ruby:hover rt {
-    visibility: visible;
-  }
+    & rt {
+        visibility: hidden;
+    }
+
+    & ruby:hover rt {
+        visibility: visible;
+    }
 }
 
 .mobile .sentence,
 html:not(.mobile) .sentence-mobile {
-  display: none;
+    display: none;
 }
 
 /* Footer */
 footer {
-  margin-top: auto;
-  width: 100%;
+    margin-top: auto;
+    width: 100%;
 }
 
 .bot-container {
-  display: flex;
-  justify-content: flex-end;
-  max-width: calc(var(--max-width) + 20px);
-  margin: 0px auto;
-  width: calc(100% - 20px);
+    display: none;
+    justify-content: flex-end;
+    max-width: calc(var(--max-width) + 20px);
+    margin: 0 auto;
+    width: calc(100% - 20px);
 }
 
 .tags-container {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 .tags-container .tags {
-  min-height: 1.6em;
+    min-height: 1.6em;
 }
 
 .tags {
-  font-family: var(--font-sans);
-  background-color: var(--bg-elevated);
-  color: var(--fg-color);
-  display: inline-grid;
-  place-items: center;
-  padding: 1px 5px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  margin: auto 3px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  max-width: 60dvw;
-  white-space: nowrap;
+    font-family: var(--font-sans), sans-serif;
+    background-color: var(--bg-elevated);
+    color: var(--fg-color);
+    display: inline-grid;
+    place-items: center;
+    padding: 1px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    margin: auto 3px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 60dvw;
+    white-space: nowrap;
 }
 
 .mobile .tags {
-  padding: 1px 3px;
-  font-size: 9px;
+    padding: 1px 3px;
+    font-size: 9px;
 }
 
 /* Definition Header */
 .def-header {
-  display: flex;
-  font-size: 30px;
-  justify-content: center;
-  align-items: center;
-  max-width: 820px;
-  margin-inline: auto;
-  position: relative;
-  gap: min(20px, 2vw);
+    display: flex;
+    font-size: 30px;
+    justify-content: center;
+    align-items: center;
+    max-width: 820px;
+    margin-inline: auto;
+    position: relative;
+    gap: min(20px, 2vw);
 }
 
 .dh-left {
-  /* left */
-  background: var(--bg-elevated);
-  padding: 0.52em;
-  border-radius: 5px;
-  flex: 1;
-  /* takes up all available space */
+    /* left */
+    background: var(--bg-elevated);
+    padding: 0.52em;
+    border-radius: 5px;
+    flex: 1;
+    /* takes up all available space */
+
+    backdrop-filter: blur(calc(12px * var(--transparency-level)));
+    -webkit-backdrop-filter: blur(calc(12px * var(--transparency-level)));
+    box-shadow: 0 8px 32px var(--shadow-color),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .dh-right {
-  max-width: 400px;
-  position: relative;
-  font-size: 0;
-  /* weird hack needed to make the image stay in line with the .def-header */
+    max-width: 400px;
+    position: relative;
+    font-size: 0;
+    /* weird hack needed to make the image stay in line with the .def-header */
 }
 
 .mobile .dh-left {
-  background: none;
-  padding: 0em;
-  border-radius: 0px;
+    background: none;
+    padding: 0;
+    border-radius: 0;
 }
 
 .mobile .dh-left:has(~ .dh-right) {
-  max-width: 60vw;
+    max-width: 60vw;
 }
 
 .mobile .dh-right {
-  max-width: 40vw;
+    max-width: 40vw;
 }
 
 /* Misc. info */
 .misc-info {
-  font-family: var(--font-sans);
-  background-color: var(--bg-elevated);
-  border-radius: 8px;
-  padding: 10px;
-  margin: 0 auto;
+    font-family: var(--font-sans), sans-serif;
+    background-color: var(--bg-elevated);
+    border-radius: 8px;
+    padding: 10px;
+    margin: 0 auto;
 }
 
 .misc-info ul {
-  margin: 0;
+    margin: 0;
 }
 
 /* ----- Misc ----- */
 
 /* Furigana */
 ruby rt {
-  user-select: none;
+    user-select: none;
 }
 
 /* Bold */
 b {
-  color: var(--bold);
-  font-weight: 600;
+    color: var(--bold);
+    font-weight: 600;
 }
 
 .mobile b {
-  font-weight: 400;
+    font-weight: 400;
 }
 
 /* Hide scrollbar */
 .card {
-  -ms-overflow-style: none;
-  scrollbar-width: 0;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 /* Dropdown */
 details {
-  font-family: var(--font-sans);
-  margin: 5px 0px;
+    font-family: var(--font-sans), sans-serif;
+    margin: 5px 0;
 }
 
 summary {
-  user-select: none;
-  cursor: pointer;
-  margin: 0px auto;
+    user-select: none;
+    cursor: pointer;
+    margin: 0 auto;
 }
 
 /* Pitch graphs css */
 .pitch-low {
-  position: relative;
+    position: relative;
 }
 
 .pitch-high {
-  position: relative;
+    position: relative;
 }
 
 .pitch-high > .pitch-line {
-  display: block;
-  position: absolute;
-  top: -0.1em;
-  left: 0;
-  right: 0;
-  height: 0;
-  border-top-width: 0.1em;
-  border-top-style: solid;
+    display: block;
+    position: absolute;
+    top: -0.1em;
+    left: 0;
+    right: 0;
+    height: 0;
+    border-top-width: 0.1em;
+    border-top-style: solid;
 }
 
 .pitch-to-drop {
-  position: relative;
-  padding-right: 0.1em;
-  margin-right: 0.1em;
+    position: relative;
+    padding-right: 0.1em;
+    margin-right: 0.1em;
 }
 
 .pitch-to-drop > .pitch-line {
-  display: block;
-  position: absolute;
-  top: -0.1em;
-  left: 0;
-  right: 0;
-  border-top-width: 0.1em;
-  border-top-style: solid;
-  right: -0.1em;
-  height: 0.4em;
-  border-right-width: 0.1em;
-  border-right-style: solid;
+    display: block;
+    position: absolute;
+    top: -0.1em;
+    left: 0;
+    border-top-width: 0.1em;
+    border-top-style: solid;
+    right: -0.1em;
+    height: 0.4em;
+    border-right-width: 0.1em;
+    border-right-style: solid;
 }
 
 /* Pitch coloring */
 .heiban {
-  color: var(--heiban);
+    color: var(--heiban);
 }
 
 .atamadaka {
-  color: var(--atamadaka);
+    color: var(--atamadaka);
 }
 
 .nakadaka {
-  color: var(--nakadaka);
+    color: var(--nakadaka);
 }
 
 .odaka {
-  color: var(--odaka);
+    color: var(--odaka);
 }
 
 .kifuku {
-  color: var(--kifuku);
+    color: var(--kifuku);
 }
 
 /* Format Definitions */
 ul[data-sc-content="glossary"] > li:not(:first-child)::before {
-  white-space: pre-wrap;
-  content: " | ";
-  display: inline;
+    white-space: pre-wrap;
+    content: " | ";
+    display: inline;
 }
 
 ul[data-sc-content="glossary"] > li {
-  display: inline;
+    display: inline;
 }
 
 ul[data-sc-content="glossary"] {
-  display: inline;
-  list-style: none;
-  padding-left: 0;
+    display: inline;
+    list-style: none;
+    padding-left: 0;
 }
 
 [data-sc-content="glossary"] ~ ul,
 [data-sc-content="glossary"] ~ div {
-  line-height: normal;
+    line-height: normal;
 }
 
 [data-sc-content="attribution"],
 [data-sc-content="graphic-attribution"] {
-  display: none;
+    display: none;
 }
 
 /* reduce indentations of Jitendex for mobile */
@@ -852,107 +1131,76 @@ ul[data-sc-content="glossary"] {
 .mobile li[data-dictionary^="Jitendex"] ol,
 .mobile li[data-details^="Jitendex"] ul,
 .mobile li[data-details^="Jitendex"] ol {
-  padding-left: 0.3em;
+    padding-left: 0.3em;
 }
 
 /* Turn off italics */
 .definition i {
-  font-style: normal;
+    font-style: normal;
 }
 
 li[data-dictionary^="JMdict"] i {
-  font-style: italic;
+    font-style: italic;
 }
 
 .definition a span {
-  max-width: 300px !important;
+    max-width: 300px !important;
 }
 
 .definition .hidden {
-  display: none;
+    display: none;
 }
+
+.dh-right img:hover,
+.yomitan-glossary a:hover {
+    filter: none;
+}
+
 
 /* Prevent wrapping in the middle of a Jitendex tags */
 span[data-sc-code] {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 
 /* backwards compatibility code for JPMN definitions */
 li[data-details="JMdict (English)"] .dict-group__glossary > ul,
-li[data-details="JMdict (English)"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"],
+li[data-details="JMdict (English)"] .dict-group__glossary ul[data-sc-content="glossary"],
 li[data-details="JMdict"] .dict-group__glossary > ul,
 li[data-details="JMdict"] .dict-group__glossary ul[data-sc-content="glossary"],
 li[data-details="JMdict Extra"] .dict-group__glossary > ul,
-li[data-details="JMdict Extra"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"] {
-  display: inline;
-  padding-left: 0em;
+li[data-details="JMdict Extra"] .dict-group__glossary ul[data-sc-content="glossary"] {
+    display: inline;
+    padding-left: 0;
 }
 
 li[data-details="JMdict (English)"] .dict-group__glossary > ul > li,
-li[data-details="JMdict (English)"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li,
+li[data-details="JMdict (English)"] .dict-group__glossary ul[data-sc-content="glossary"] > li,
 li[data-details="JMdict"] .dict-group__glossary > ul > li,
-li[data-details="JMdict"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li,
+li[data-details="JMdict"] .dict-group__glossary ul[data-sc-content="glossary"] > li,
 li[data-details="JMdict Extra"] .dict-group__glossary > ul > li,
-li[data-details="JMdict Extra"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li {
-  display: inline;
-  padding-right: 0em;
-  margin-right: 0em;
+li[data-details="JMdict Extra"] .dict-group__glossary ul[data-sc-content="glossary"] > li {
+    display: inline;
+    padding-right: 0;
+    margin-right: 0;
 }
 
 li[data-details="JMdict (English)"] .dict-group__glossary > ul > li::after,
-li[data-details="JMdict (English)"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li::after,
+li[data-details="JMdict (English)"] .dict-group__glossary ul[data-sc-content="glossary"] > li::after,
 li[data-details="JMdict"] .dict-group__glossary > ul > li::after,
-li[data-details="JMdict"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li::after,
+li[data-details="JMdict"] .dict-group__glossary ul[data-sc-content="glossary"] > li::after,
 li[data-details="JMdict Extra"] .dict-group__glossary > ul > li::after,
-li[data-details="JMdict Extra"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li::after {
-  content: " | ";
-  white-space: pre-wrap;
+li[data-details="JMdict Extra"] .dict-group__glossary ul[data-sc-content="glossary"] > li::after {
+    content: " | ";
+    white-space: pre-wrap;
 }
 
-li[data-details="JMdict (English)"]
-  .dict-group__glossary
-  > ul
-  > li:last-of-type:after,
-li[data-details="JMdict (English)"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li:last-of-type:after,
+li[data-details="JMdict (English)"] .dict-group__glossary > ul > li:last-of-type:after,
+li[data-details="JMdict (English)"] .dict-group__glossary ul[data-sc-content="glossary"] > li:last-of-type:after,
 li[data-details="JMdict"] .dict-group__glossary > ul > li:last-of-type:after,
-li[data-details="JMdict"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li:last-of-type:after,
-li[data-details="JMdict Extra"]
-  .dict-group__glossary
-  > ul
-  > li:last-of-type:after,
-li[data-details="JMdict Extra"]
-  .dict-group__glossary
-  ul[data-sc-content="glossary"]
-  > li:last-of-type:after {
-  display: none;
+li[data-details="JMdict"] .dict-group__glossary ul[data-sc-content="glossary"] > li:last-of-type:after,
+li[data-details="JMdict Extra"] .dict-group__glossary > ul > li:last-of-type:after,
+li[data-details="JMdict Extra"] .dict-group__glossary ul[data-sc-content="glossary"] > li:last-of-type:after {
+    display: none;
 }
 
 /*
@@ -962,35 +1210,26 @@ li[data-details="JMdict Extra"]
 ol li[data-details="JMdict (English)"] .dict-group__tag-list,
 ol li[data-details="JMdict"] .dict-group__tag-list,
 ol li[data-details="JMdict Extra"] .dict-group__tag-list {
-  font-style: italic;
+    font-style: italic;
 }
 
 /* removes the dictionary entry for jmdict */
-ol
-  li[data-details="JMdict (English)"]
-  .dict-group__tag-list
-  .dict-group__tag--dict,
+ol li[data-details="JMdict (English)"] .dict-group__tag-list .dict-group__tag--dict,
 ol li[data-details="JMdict"] .dict-group__tag-list .dict-group__tag--dict,
-ol
-  li[data-details="JMdict Extra"]
-  .dict-group__tag-list
-  .dict-group__tag--dict {
-  display: none;
+ol li[data-details="JMdict Extra"] .dict-group__tag-list .dict-group__tag--dict {
+    display: none;
 }
 
 /* Makes Nico/Pixiv italic */
 ol li[data-details="Nico/Pixiv"] .dict-group__tag-list {
-  font-style: italic;
+    font-style: italic;
 }
 
 /* Removes the extra text for the collapsed 新和英 display */
-ol
-  li[data-details="新和英"]
-  details.glossary-text__details
-  .glossary-text__summary
-  .dict-group__glossary--first-line {
-  display: none;
+ol li[data-details="新和英"] details.glossary-text__details .glossary-text__summary .dict-group__glossary--first-line {
+    display: none;
 }
+
 
 /*
  * --------------------
@@ -998,75 +1237,189 @@ ol
  * --------------------
  */
 .dict-group__tag-list .dict-group__tag:not(:first-child)::before {
-  content: ", ";
-}
-
-.dict-group__tag-list::before {
-  content: "(";
-}
-
-.dict-group__tag-list::after {
-  content: ") ";
+    content: ", ";
 }
 
 .definition ol:has(> li[data-dictionary]),
 .definition ol:has(> li[data-details]) {
-  padding-inline-start: 1.3em;
+    padding-inline-start: 0;
 }
 
 /* Removes list numbering when only one list element  */
 .definition ol:has(> li[data-dictionary]:only-of-type),
 .definition ol:has(> li[data-details]:only-of-type) {
-  list-style-type: none;
-  padding-inline-start: 0;
+    list-style-type: none;
+    padding-inline-start: 0;
 }
+
+li[data-dictionary],
+li[data-details] {
+    position: relative;
+    margin: 12px 0;
+    padding: 12px 16px;
+    background: var(--bg-inset);
+    border-radius: 8px;
+    border-left: 4px solid var(--general-dict-border-color);
+    list-style-type: none;
+
+    /* shadow for depth */
+    backdrop-filter: blur(calc(12px * var(--transparency-level)));
+    -webkit-backdrop-filter: blur(calc(12px * var(--transparency-level)));
+    box-shadow: 0 8px 32px var(--shadow-color),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+
+/* Dictionary colour borders */
+li[data-dictionary] > i,
+li[data-details] > i {
+    display: block;
+    font-family: "Hiragino Kaku Gothic ProN", serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: var(--fg-subtle);
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--general-dict-border-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+li[data-dictionary="旺文社国語辞典 第十二版"] > i {
+    border-bottom: 3px solid var(--obunsha-kokugo-border-color);
+}
+
+li[data-dictionary="小学館例解学習国語 第十二版"] > i {
+    border-bottom: 3px solid var(--rgko12-border-color);
+}
+
+li[data-dictionary="明鏡国語辞典 第三版"] > i {
+    border-bottom: 3px solid var(--meikyo-border-color);
+}
+
+li[data-dictionary="三省堂 全訳読解古語辞典"] > i {
+    border-bottom: 3px solid var(--skogo-border-color);
+}
+
+li[data-dictionary="旺文社 全訳古語辞典"] > i {
+    border-bottom: 3px solid var(--obunsha-kogo-border-color);
+}
+
+li[data-dictionary="南山堂医学大辞典 第20版"] > i {
+    border-bottom: 3px solid var(--nanmed-dict-border-color);
+}
+
+li[data-dictionary="TISMKANJI"] > i {
+    border-bottom: 3px solid var(--tismkanji-border-color);
+}
+
+li[data-dictionary="四字熟語の百科事典"] > i {
+    border-bottom: 3px solid var(--yoji-hyakka-border-color);
+}
+
+li[data-dictionary="PIXIV"] > i {
+    border-bottom: 3px solid var(--pixiv-border-color);
+}
+
+li[data-dictionary="角川新字源 改訂新版"] > i {
+    border-bottom: 3px solid var(--shinjigen-border-color);
+}
+
+li[data-dictionary="大辞泉 第二版"] > i {
+    border-bottom: 3px solid var(--daijisen-border-color);
+}
+
+li[data-dictionary="漢検漢字辞典　第二版"] > i {
+    border-bottom: 3px solid var(--kanken-border-color);
+}
+
+li[data-dictionary="新明解四字熟語辞典"] > i {
+    border-bottom: 3px solid var(--smk8-border-color);
+}
+
+li[data-dictionary="大辞林　第四版"] > i {
+    border-bottom: 3px solid var(--daijirin-border-color);
+}
+
+li[data-dictionary="精選版　日本国語大辞典"] > i {
+    border-bottom: 3px solid var(--seisenban-border-color);
+}
+
+li[data-dictionary="広辞苑 第七版"] > i {
+    border-bottom: 3px solid var(--koujien-border-color);
+}
+
+li[data-dictionary="YOJI-JUKUGO"] > i {
+    border-bottom: 3px solid var(--yoji-yoji);
+}
+
+li[data-dictionary="学研 四字熟語辞典"] > i {
+    border-bottom: 3px solid var(--gakken-yoji);
+}
+
+li[data-dictionary="有斐閣現代心理学辞典"] > i {
+    border-bottom: 4px solid;
+    border-image: var(--shinrigaku-border-image) 1;
+}
+
+li[data-dictionary="有斐閣法律用語辞典 第５版"] > i {
+    border-bottom: 4px solid;
+    border-image: var(--ydl-border-image) 1;
+}
+
+li[data-dictionary="漢字でGo!"] > i {
+    border-bottom: 4px solid;
+    border-image: var(--kanjidego-border-image) 1;
+}
+
 
 /* Better formatting meikyo 3rd edition */
 li[data-dictionary="明鏡国語辞典 第三版"] span {
-  width: 25em !important;
-  vertical-align: bottom !important;
+    width: 25em !important;
+    vertical-align: bottom !important;
 }
 
-li[data-dictionary="明鏡国語辞典 第三版"]
-  div:has(> span[data-sc-class="品格"]) {
-  margin-bottom: 5px !important;
+li[data-dictionary="明鏡国語辞典 第三版"] div:has(> span[data-sc-class="品格"]) {
+    margin-bottom: 5px !important;
 }
 
 li[data-dictionary="明鏡国語辞典 第三版"] [data-sc-body] {
-  font-size: var(--main-def-size) !important;
+    font-size: var(--main-def-size) !important;
 }
 
 /* Formatting for sanseido kogo dict */
 li[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-body] {
-  line-height: 1.4em;
+    line-height: 1.4em;
 }
+
 [data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-rectr][data-sc-fill] {
-  color: #f5f5f5 !important;
+    color: #f5f5f5 !important;
 }
-.nightMode
-  [data-dictionary="三省堂 全訳読解古語辞典"]
-  span[data-sc-rectr][data-sc-fill] {
-  color: #1e1e1e !important;
+
+.nightMode [data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-rectr][data-sc-fill] {
+    color: #1e1e1e !important;
 }
 
 /* Formatting for oubunsha kogo dict */
 li[data-dictionary="旺文社 全訳古語辞典"] [data-sc-audio_play_button],
 li[data-dictionary="旺文社 全訳古語辞典"] [data-sc-audio_stop_button] {
-  display: none !important;
+    display: none !important;
 }
+
 li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc用例囲み-g],
 li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc和歌俳句囲み-g],
 li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc冒頭文囲み-g],
 li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc小倉囲み-g] {
-  margin-top: 0 !important;
+    margin-top: 0 !important;
 }
+
 [data-dictionary="旺文社 全訳古語辞典"] span[data-sc-rectr][data-sc-fill] {
-  color: #f5f5f5 !important;
+    color: #f5f5f5 !important;
 }
-.nightMode
-  [data-dictionary="旺文社 全訳古語辞典"]
-  span[data-sc-rectr][data-sc-fill] {
-  color: #1e1e1e !important;
+
+.nightMode [data-dictionary="旺文社 全訳古語辞典"] span[data-sc-rectr][data-sc-fill] {
+    color: #1e1e1e !important;
 }
 
 /*
@@ -1074,92 +1427,400 @@ li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc小倉囲み-g] {
  *  Please modify the variables on the top of the file.
  */
 settings[data-main-picture-position="left"] + #qa .def-header {
-  flex-flow: row-reverse;
+    flex-flow: row-reverse;
 }
 
 settings[data-sentence-furigana="always"] + #qa .sentence rt,
 settings[data-sentence-furigana="always"] + #qa .sentence-mobile rt {
-  visibility: visible;
+    visibility: visible;
 }
 
 settings[data-sentence-furigana="off"] + #qa .sentence rt,
 settings[data-sentence-furigana="off"] + #qa .sentence-mobile rt {
-  display: none;
+    display: none;
 }
 
-html.mobile
-  settings[data-mobile-sentence-position="above"]
-  + #qa
-  .sentence-mobile,
+html.mobile settings[data-mobile-sentence-position="above"] + #qa .sentence-mobile,
 html:not(.mobile) settings[data-sentence-position="below"] + #qa .sentence {
-  display: none;
+    display: none;
 }
 
 html.mobile settings[data-mobile-sentence-position="above"] + #qa .sentence,
-html:not(.mobile)
-  settings[data-sentence-position="below"]
-  + #qa
-  .sentence-mobile {
-  display: block;
+html:not(.mobile) settings[data-sentence-position="below"] + #qa .sentence-mobile {
+    display: block;
 }
 
 html.mobile settings[data-mobile-audio-buttons="header"] + #qa .audio-buttons {
-  position: static;
+    position: static;
 }
 
 settings[data-nsfw-blur-contained="on"] + #qa .NSFW,
 settings[data-nsfw-blur-contained="on"] + #qa .nsfw,
 settings[data-nsfw-blur-contained="on"] + #qa .Nsfw {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 settings[data-glossary-separator="on"] + #qa .definition {
-  & li[data-dictionary]:not(:last-of-type),
-  & li[data-details]:not(:last-of-type) {
-    border-bottom: 1px dashed var(--fg-subtle);
-  }
+    & li[data-dictionary]:not(:last-of-type),
+    & li[data-details]:not(:last-of-type) {
+        border-bottom: 1px dashed var(--fg-subtle);
+    }
 }
 
 settings[data-jitendex-format~="minimal"] + #qa .definition {
-  & [data-sc-content]:not([data-sc-content="glossary"]) {
-    display: none;
-  }
+    & [data-sc-content]:not([data-sc-content="glossary"]) {
+        display: none;
+    }
 }
 
 settings[data-jitendex-format~="minimal"] + #qa .definition,
 settings[data-jitendex-format~="no-tags"] + #qa .definition {
-  & [data-sc-code] {
-    display: none;
-  }
-  & ul {
-    padding-inline-start: 0px;
-    margin-block: 0px;
-    & > li::marker {
-      content: "";
+    & [data-sc-code] {
+        display: none;
     }
-  }
+
+    & ul {
+        padding-inline-start: 0;
+        margin-block: 0;
+
+        & > li::marker {
+            content: "";
+        }
+    }
 }
 
 settings[data-jitendex-format~="no-sentence"] + #qa .definition {
-  & [data-sc-content|="example-sentence"] {
-    display: none;
-  }
+    & [data-sc-content|="example-sentence"] {
+        display: none;
+    }
 }
 
 settings[data-jitendex-format~="no-forms"] + #qa .definition {
-  & [data-sc-content="forms"] {
-    display: none;
-  }
+    & [data-sc-content="forms"] {
+        display: none;
+    }
 }
 
 settings[data-jitendex-format~="no-xref"] + #qa .definition {
-  & [data-sc-content|="xref"] {
-    display: none;
-  }
+    & [data-sc-content|="xref"] {
+        display: none;
+    }
 }
 
 settings[data-jitendex-format~="no-img"] + #qa .definition {
-  & [data-sc-content|="graphic"] {
-    display: none;
-  }
+    & [data-sc-content|="graphic"] {
+        display: none;
+    }
+}
+
+
+/* Image navigation edges styling */
+.dh-right .image {
+    position: relative;
+}
+
+.image-left-edge,
+.image-right-edge {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    background: rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-left-edge {
+    left: 0;
+    border-radius: 0;
+}
+
+.image-right-edge {
+    right: 0;
+    border-radius: 0;
+}
+
+/* Show edge only when hovering over it specifically */
+.image-left-edge:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.image-right-edge:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Arrow indicators */
+.image-left-edge::before {
+    content: '‹';
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.image-right-edge::before {
+    content: '›';
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Ensure the image container has proper positioning context */
+.dh-right .image.tappable {
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Make sure the image doesn't interfere with edge detection */
+.dh-right .image img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 1;
+}
+
+
+/* -------------------------------- */
+/* ----- iOS specific styling ----- */
+/* -------------------------------- */
+.ipad,
+.iphone {
+    /* Main background container */
+
+    .card {
+        position: relative;
+        min-height: 100vh;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Workaround for background image on iOS*/
+
+    .card::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: var(--background-image);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        opacity: var(--background-opacity);
+        filter: blur(var(--background-blur));
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    .lapis-card {
+        margin-block-start: -0.25em;
+    }
+
+    #settings-menu {
+        /* Prevent touch events from bubbling to the card */
+        touch-action: manipulation;
+        pointer-events: auto;
+    }
+
+    #settings-button {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+
+        touch-action: manipulation;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    #settings-button:active {
+        transform: scale(0.95);
+        background: var(--bg-inset);
+    }
+
+    #settings-panel {
+        width: 200px;
+        padding: 16px;
+        max-height: calc(50vh - 80px);
+
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    #settings-panel::after {
+        content: "";
+        position: sticky;
+        bottom: 0;
+        height: 8px;
+        background: linear-gradient(transparent, var(--bg-elevated));
+        pointer-events: none;
+        margin: 0 -12px -12px;
+        border-radius: 0 0 8px 8px;
+    }
+
+    #settings-panel::-webkit-scrollbar {
+        display: none;
+    }
+
+    .settings-item input[type="range"] {
+        height: 24px;
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: 22px;
+        outline: none;
+    }
+
+    .settings-item input[type="range"]:active {
+        transform: scale(1.02);
+    }
+
+    .settings-item input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .settings-item select {
+        width: 100%;
+        padding: 12px 8px;
+        font-size: 16px;
+        border: 1px solid var(--fg-subtle);
+        border-radius: 6px;
+    }
+
+    .settings-item select:focus {
+        outline: 2px solid var(--bg-inset);
+        outline-offset: 2px;
+    }
+
+    .settings-item {
+        margin-bottom: 20px;
+    }
+
+    .settings-item label {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    input, select {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+
+    #settings-button:active,
+    .settings-item input:active,
+    .settings-item select:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+}
+
+/* --- Font settings for specific dictionaries --- */
+
+/* --- 三省堂全訳古語辞典 --- */
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-body],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc見出歴史仮名],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc見出現代仮名],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc段落歴史仮名],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc段落現代仮名],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc中黒語義],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-em][data-sc小書き],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-scルビ],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc返り点] {
+    font-family: "Hiragino Mincho ProN", serif;
+}
+
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc見出G],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc絵巻タイトル],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-scGendai見出],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc活用分節],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc語構成],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-f-w-hyphen],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc活用表-label],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc詩歌全形],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc見出相当部],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc詩歌技法ロゴ],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc用例訳注ロゴ],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc参考ロゴ],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc注釈ロゴ],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc冒頭文ロゴテキスト],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc作品例ロゴテキスト],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-em][data-sc-gothic],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-em][data-sc赤],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc補説小見出],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc読解見出],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc現代見出],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc読解小見出],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc現代小見出],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-scチャート見出],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc付録参照ロゴ],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc絵巻図版],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc識別見出],
+[data-dictionary="三省堂 全訳読解古語辞典"] td[data-sc識別ヘッダ項],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc識別説明],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-gendai-ref品詞],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-gendai-ref-品詞],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-gendai-ref-desc],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-gendai-ref-desc],
+[data-dictionary="三省堂 全訳読解古語辞典"] span[data-sc-rectr] {
+    font-family: "Hiragino Kaku Gothic ProN", "sans-serif";
+}
+
+/* --- 旺文社全訳古語辞典 --- */
+
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc-body],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc巻頭カラーテキストタイトル] span[data-sc割],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc-hyoki],
+li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc活用インライン-g],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc参照矢印] {
+    font-family: "Yu Mincho Pr6N", "sans-serif";
+}
+
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc主見出],
+li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc用例メタデータ],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc用例訳],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc巻頭カラーテキストタイトル],
+li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc訳語-g],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc活用タイトル],
+li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc活用型],
+li[data-dictionary="旺文社 全訳古語辞典"] div[data-scパネルタイトル],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc重点義タイトル],
+li[data-dictionary="旺文社 全訳古語辞典"] div[data-scガイド大語義項],
+li[data-dictionary="旺文社 全訳古語辞典"] td[data-scガイド項タイトル],
+li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc発展タイトル],
+li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc語の広がりタイトル],
+li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc敬語ガイドタイトル],
+li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc図解学習タイトル],
+li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc慣用表現タイトル],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc発展-m],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc語の広がり-m],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc共通義タイトル],
+li[data-dictionary="旺文社 全訳古語辞典"] td[data-sc類語項][data-sc語句],
+li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc識別ボードタイトル],
+li[data-dictionary="旺文社 全訳古語辞典"] div[data-sc文法要語解説小見出],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc-rect],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc-rectr],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc-circle],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc語義-m],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc小語義-m],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc-bold],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc-color],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc-strong],
+li[data-dictionary="旺文社 全訳古語辞典"] span[data-sc-gendai見出] {
+    font-family: "Hiragino Kaku Gothic ProN", "sans-serif";
 }

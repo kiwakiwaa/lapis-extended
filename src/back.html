@@ -8,7 +8,7 @@
         {{#Frequency}}
         <span class="freq-dropdown">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" class="dropdown-arrow-svg"
-                viewBox="0 0 16 16">
+                 viewBox="0 0 16 16">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
                 <path d="M 12.7,6.5 H 3.3 L 8,11 Z"></path>
             </svg>
@@ -19,84 +19,150 @@
 </header>
 
 <main lang="ja">
-    <!-- The first row (vocab box+picture) -->
-    <div class="def-header">
-        <div class="dh-left">
-            <div class="vocab">
-                {{#ExpressionFurigana}}{{furigana:ExpressionFurigana}}{{/ExpressionFurigana}}
-                {{^ExpressionFurigana}}{{Expression}}{{/ExpressionFurigana}}
-            </div>
-
-            <!-- Reading + Pitch Accent -->
-            <div class="info">
-                <div class="pitch">
-                    {{#ExpressionFurigana}}{{kana:ExpressionFurigana}}{{/ExpressionFurigana}}
-                    {{^ExpressionFurigana}}{{ExpressionReading}}{{/ExpressionFurigana}}
+    <div class="lapis-card">
+        <!-- The first row (vocab box+picture) -->
+        <div class="def-header">
+            <div class="dh-left">
+                <div class="vocab">
+                    {{#ExpressionFurigana}}{{furigana:ExpressionFurigana}}{{/ExpressionFurigana}}
+                    {{^ExpressionFurigana}}{{Expression}}{{/ExpressionFurigana}}
                 </div>
 
-                <!-- Pitch Accent -->
-                {{#PitchPosition}}
-                <span id="pitch-tags" class="tags"> {{PitchPosition}} </span>
-                {{/PitchPosition}}
-                <br />
-                <div class="audio-buttons">{{ExpressionAudio}} {{SentenceAudio}}</div>
+                <!-- Reading + Pitch Accent -->
+                <div class="info">
+                    <div class="pitch">
+                        {{#ExpressionFurigana}}{{kana:ExpressionFurigana}}{{/ExpressionFurigana}}
+                        {{^ExpressionFurigana}}{{ExpressionReading}}{{/ExpressionFurigana}}
+                    </div>
+
+                    <!-- Pitch Accent -->
+                    {{#PitchPosition}}
+                    <span id="pitch-tags" class="tags"> {{PitchPosition}} </span>
+                    {{/PitchPosition}}
+                    <br/>
+                    <div class="audio-buttons">{{ExpressionAudio}} {{SentenceAudio}}</div>
+                </div>
+            </div>
+
+            <!-- Image -->
+            {{#Picture}}
+            <div class="dh-right">
+                <div class="image tappable {{Tags}}">{{Picture}}</div>
+            </div>
+            {{/Picture}}
+        </div>
+
+        <br>
+        <div class="sentence">
+            {{#SentenceFurigana}} {{furigana:SentenceFurigana}} {{/SentenceFurigana}}
+            {{^SentenceFurigana}} {{furigana:Sentence}} {{/SentenceFurigana}}
+        </div>
+
+        <!-- The entire definition box -->
+        <div class="def-info">First Definition 1/?</div>
+        <div class="main-def">
+            <div class="edge tappable" id="edge-prev" onclick="changeIndex(-1)"></div>
+            <div class="edge tappable" id="edge-next" onclick="changeIndex(1)"></div>
+            {{#DefinitionPicture}}
+            <div class="def-image tappable">{{DefinitionPicture}}</div>
+            {{/DefinitionPicture}}
+            <div class="definition">
+                {{#SelectionText}}
+                <div id="selection" data-display-name="Text Selection">{{SelectionText}}</div>
+                {{/SelectionText}}
+                {{#MainDefinition}}
+                <div id="primary" data-display-name="Primary Definition">{{MainDefinition}}</div>
+                {{/MainDefinition}}
+                <div id="glossaries" data-display-name="Glossaries">{{Glossary}}</div>
             </div>
         </div>
 
-        <!-- Image -->
-        {{#Picture}}
-        <div class="dh-right">
-            <div class="image tappable {{Tags}}">{{Picture}}</div>
+        <!-- This is for the sentence that you see on mobile (positioned under definition), on Desktop, the sentence goes above the definition box, and this is hidden -->
+        <div class="sentence-mobile">
+            {{#SentenceFurigana}} {{furigana:SentenceFurigana}} {{/SentenceFurigana}}
+            {{^SentenceFurigana}} {{furigana:Sentence}} {{/SentenceFurigana}}
         </div>
-        {{/Picture}}
+
+        <!------- Image modal --------->
+        <div class="modal-bg tappable">
+            <div class="img-popup"></div>
+        </div>
+
+        {{#MiscInfo}}
+        <details>
+            <summary>Misc. info</summary>
+            <div class="misc-info">
+                === Details ===
+                <br/>
+                {{MiscInfo}}
+            </div>
+        </details>
+        {{/MiscInfo}}
     </div>
 
-    <br>
-    <div class="sentence">
-        {{#SentenceFurigana}} {{furigana:SentenceFurigana}} {{/SentenceFurigana}}
-        {{^SentenceFurigana}} {{furigana:Sentence}} {{/SentenceFurigana}}
-    </div>
+    <!------- User settings window --------->
+    <div id="settings-menu">
+        <button id="settings-button" aria-label="設定メニュー">☰</button>
+        <div id="settings-panel">
+            <div class="settings-item" id="transparency-setting">
+                <label for="transparency-level">透明度:</label>
+                <input type="range" id="transparency-level" min="0.1" max="1" step="0.1" value="1">
+                <span id="transparency-value">100%</span>
+            </div>
 
-    <!-- The entire definition box -->
-    <div class="def-info">First Definition 1/?</div>
-    <div class="main-def">
-        <div class="edge tappable" id="edge-prev" onclick="changeIndex(-1)"></div>
-        <div class="edge tappable" id="edge-next" onclick="changeIndex(1)"></div>
-        {{#DefinitionPicture}}
-        <div class="def-image tappable">{{DefinitionPicture}}</div>
-        {{/DefinitionPicture}}
-        <div class="definition">
-            {{#SelectionText}}
-            <div id="selection" data-display-name="Text Selection">{{SelectionText}}</div>
-            {{/SelectionText}}
-            {{#MainDefinition}}
-            <div id="primary" data-display-name="Primary Definition">{{MainDefinition}}</div>
-            {{/MainDefinition}}
-            <div id="glossaries" data-display-name="Glossaries">{{Glossary}}</div>
+            <div class="settings-item">
+                <label for="term-font">表記フォント:</label>
+                <select id="term-font">
+                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                    <option value="Yu Mincho Pr6N">游明朝体</option>
+                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                </select>
+            </div>
+
+            <div class="settings-item">
+                <label for="reading-font">読みフォント:</label>
+                <select id="reading-font">
+                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                    <option value="Yu Mincho Pr6N">游明朝体</option>
+                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                </select>
+            </div>
+
+            <div class="settings-item">
+                <label for="sentence-font">例文フォント:</label>
+                <select id="sentence-font">
+                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                    <option value="Yu Mincho Pr6N">游明朝体</option>
+                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                </select>
+            </div>
+
+            <div class="settings-item">
+                <label for="dictionary-font">辞書フォント:</label>
+                <select id="dictionary-font">
+                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                    <option value="Yu Mincho Pr6N">游明朝体</option>
+                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                </select>
+            </div>
         </div>
     </div>
-
-    <!-- This is for the sentence that you see on mobile (positioned under definition), on Desktop, the sentence goes above the definition box, and this is hidden -->
-    <div class="sentence-mobile">
-        {{#SentenceFurigana}} {{furigana:SentenceFurigana}} {{/SentenceFurigana}}
-        {{^SentenceFurigana}} {{furigana:Sentence}} {{/SentenceFurigana}}
-    </div>
-
-    <!------- Image modal --------->
-    <div class="modal-bg tappable">
-        <div class="img-popup"></div>
-    </div>
-
-    {{#MiscInfo}}
-    <details>
-        <summary>Misc. info</summary>
-        <div class="misc-info">
-            === Details ===
-            <br />
-            {{MiscInfo}}
-        </div>
-    </details>
-    {{/MiscInfo}}
 </main>
 
 <!----------- Footer ------------->
@@ -113,6 +179,10 @@
 
 <!----------- Scripts ------------>
 <script>
+    // ============================================================================
+    // LAPIS ANKI TEMPLATE - Base
+    // ============================================================================
+
     // This code is concerned with calculating the Pitch Accent and constructing the pitch accent graphs
     function isOdaka(pitchNumber) {
         const kana = `{{kana:ExpressionFurigana}}` || `{{ExpressionReading}}`;
@@ -181,7 +251,7 @@
         const tagsContainer = document.querySelector(".tags-container");
         if (!tagsContainer) return;
         const tags = `{{Tags}}`.split(" ");
-        tagsContainer.innerHTML = tags.map(tag =>`<div class="tags">${tag}</div>`).join('');
+        tagsContainer.innerHTML = tags.map(tag => `<div class="tags">${tag}</div>`).join('');
     }
 
     function groupMoras(kana) {
@@ -344,7 +414,7 @@
             // Compare content otherwise
             const primaryDict = getDictionaryContent("#primary > div");
             const glossariesDict = getDictionaryContent("#glossaries > div");
-            if (!primaryDict || !glossariesDict ) return false;
+            if (!primaryDict || !glossariesDict) return false;
             return primaryDict.innerHTML.trim() === glossariesDict.innerHTML.trim();
         }
 
@@ -369,8 +439,7 @@
         if (glossaries && glossaries.textContent === "") {
             glossaries.remove();
             glossaries = null;
-        }
-        else if (primary && glossaries && isPrimaryEqualToGloss()) {
+        } else if (primary && glossaries && isPrimaryEqualToGloss()) {
             glossaries.remove();
         }
     }
@@ -425,61 +494,6 @@
         document.head.classList.add("has-listener");
     }
 
-    // Image lightbox with fade transition similar to JPMN
-    function clickImages() {
-        const modalBg = document.querySelector(".modal-bg");
-        const imgPopup = document.querySelector(".img-popup");
-        const images = Array.from(document.querySelectorAll(".image img, .def-image img"));
-
-        if (images.length < 1) return;
-
-        for (let image of images) {
-            image.addEventListener("click", () => {
-                const imgPopupContainer = document.createElement("div");
-                const imgPopupImg = document.createElement("img");
-
-                imgPopupContainer.classList.add("img-popup-container");
-                imgPopupImg.src = image.src;
-                imgPopupImg.classList.add("img-popup-img");
-
-                if (image.height > image.width) {
-                    imgPopupContainer.style.height = "calc(100% - 20px)";
-                    imgPopupContainer.style.width = "max-content";
-                }
-
-                imgPopup.innerHTML = "";
-                imgPopup.appendChild(imgPopupContainer);
-                imgPopupContainer.appendChild(imgPopupImg);
-
-                // Force a reflow before adding active classes to ensure transitions work
-                void modalBg.offsetWidth;
-
-                // Show the modal background with fade transition
-                modalBg.style.display = "block";
-
-                // Force another reflow to ensure the display change takes effect before transition
-                void modalBg.offsetWidth;
-
-                modalBg.classList.add("active");
-                imgPopupContainer.classList.add("active");
-                document.body.classList.add("img-popup");
-            });
-        }
-
-        modalBg.addEventListener("click", () => {
-            // Removes active classes to trigger fade-out transition
-            modalBg.classList.remove("active");
-            const activeContainer = document.querySelector(".img-popup-container.active");
-            if (activeContainer) {
-                activeContainer.classList.remove("active");
-            }
-            setTimeout(() => {
-                document.body.classList.remove("img-popup");
-                modalBg.style.display = "none";
-                imgPopup.innerHTML = "";
-            }, 300);
-        });
-    }
 
     // Format plaintext comma-separated frequencies into a list
     function formatFrequencyList() {
@@ -494,18 +508,6 @@
         frequency.innerHTML = freqHtml;
     }
 
-    // Sets the height of dhLeft, dhRight, defHeader as a whole
-    function setDHHeight() {
-        var dhLeft = document.querySelector('.dh-left');
-        var dhRight = document.querySelector('.dh-right .image img');
-        var defHeader = document.querySelector('.def-header');
-
-        if (dhLeft && dhRight) {
-            var dhLeftHeight = dhLeft.offsetHeight;
-            dhRight.style.maxHeight = `${dhLeftHeight}px`;
-            defHeader.style.maxHeight = `${dhLeftHeight}px`;
-        }
-    }
 
     // Hides the dictionaries user selected in MainDefinition in Glossary field, if any
     function hideCorrectDefinition() {
@@ -568,16 +570,573 @@
     }
 
     // Initialize all functions!!!
-    function initialize() {
+    function initializeLapisBase() {
         splitTags();
         handlePitches();
         setUpDefToggle();
-        clickImages();
         formatFrequencyList();
-        setDHHeight();
         hideCorrectDefinition();
         movePrimaryDicts();
         userSettings();
+    }
+
+
+    // ============================================================================
+    // LAPIS ANKI TEMPLATE - Extended features
+    // ============================================================================
+    // Prevent event bubbling for all touch/click events on settings
+    function preventBubbling(e) {
+        e.stopPropagation();
+    }
+
+    function getElement(selector, useCache = true) {
+        if (useCache && window.cardContext.elements.has(selector)) {
+            return window.cardContext.elements.get(selector);
+        }
+        const element = document.querySelector(selector);
+        if (useCache && element) {
+            window.cardContext.elements.set(selector, element);
+        }
+        return element;
+    }
+
+    function getAllElements(selector, useCache = true) {
+        const cacheKey = `${selector}:all`;
+        if (useCache && window.cardContext.elements.has(cacheKey)) {
+            return window.cardContext.elements.get(cacheKey);
+        }
+        const elements = document.querySelectorAll(selector);
+        if (useCache && elements.length) {
+            window.cardContext.elements.set(cacheKey, elements);
+        }
+        return elements;
+    }
+
+    function cleanDictionaryName(text) {
+        if (!text) return;
+
+        text = text.replace(/[()]/g, "");
+        text = text.replace(/\[\d{4}-\d{2}-\d{2}]/g, '');
+        return text.trim();
+    }
+
+
+    window.cardContext = {
+        imageIndex: 0,
+        images: [],
+        initialized: false,
+        settingsListenersAttached: false,
+        isNarrow: false,
+
+        elements: new Map(),
+
+        fontConfigs: [
+            {
+                element: 'termFont',
+                cssVar: '--font-serif',
+                storageKey: 'lapisTermFont',
+                defaultFont: 'Hiragino Mincho ProN'
+            },
+            {
+                element: 'readingFont',
+                cssVar: '--font-sans',
+                storageKey: 'lapisReadingFont',
+                defaultFont: 'Hiragino Kaku Gothic ProN'
+            },
+            {
+                element: 'sentenceFont',
+                cssVar: '--sentence-font',
+                storageKey: 'lapisSentenceFont',
+                defaultFont: 'Hiragino Mincho ProN'
+            },
+            {
+                element: 'dictionaryFont',
+                cssVar: '--dictionary-font',
+                storageKey: 'lapisDictionaryFont',
+                defaultFont: 'Hiragino Mincho ProN'
+            }
+        ],
+
+        dictionaries: {
+            active: new Set(),
+            imageSelectors: {
+                "有斐閣現代心理学辞典": "div[data-sc-image]",
+                "小学館例解学習国語 第十二版": "[data-sc挿絵], table[data-sc-image]",
+                "三省堂 全訳読解古語辞典": "div[data-sc画像-g]",
+                "大辞泉 第二版": "div[data-sc-m-image]",
+                "現代心理学辞典": "div[data-sc-image]>div:has([data-sc-img])",
+                "南山堂医学大辞典 第20版": "span[data-sc-image-link]",
+                "角川新字源 改訂新版": "div[data-sc-imagefile]",
+                "明鏡国語辞典 第三版": "td[data-sc-img]",
+                "デジタル大辞泉": "li:has(>a>span img)",
+                "広辞苑 第七版": "div:has(>a>span)",
+                "旺文社国語辞典 第十一版": "span>a>span",
+                "旺文社国語辞典 第十二版": "[data-sc図]",
+                "漢字でGo!": "div:has(>a>span)",
+                "四字熟語の百科事典": "div:has(a img)",
+                "default": "div[data-sc画像-g], .image-container, .figure, figure, .img-container"
+            }
+        },
+
+        cacheElements() {
+            const selectors = {
+                dictionaryEntries: {selector: "li[data-dictionary]", all: true},
+                singleDictionaryEntry: {selector: ".yomitan-glossary:has(>i)"},
+                definitionContainer: {selector: "#glossaries"},
+                lapisCard: {selector: ".lapis-card"},
+                settingsPanel: {selector: "#settings-panel"},
+                settingsButton: {selector: "#settings-button"},
+                termFont: {selector: "#term-font"},
+                readingFont: {selector: "#reading-font"},
+                sentenceFont: {selector: "#sentence-font"},
+                dictionaryFont: {selector: "#dictionary-font"},
+                transparencySetting: {selector: "#transparency-setting"},
+                transparencySlider: {selector: "#transparency-level"},
+                transparencyValue: {selector: "#transparency-value"}
+            };
+
+            for (const [key, {selector, all}] of Object.entries(selectors)) {
+                this.elements[key] = all ? document.querySelectorAll(selector) : document.querySelector(selector);
+            }
+        },
+
+        identifyActiveDictionaries() {
+            this.dictionaries.active.clear();
+
+            this.elements.dictionaryEntries.forEach(entry => {
+                let dictName = entry.getAttribute('data-dictionary');
+                if (dictName) {
+                    dictName = cleanDictionaryName(dictName);
+                    this.dictionaries.active.add(dictName);
+                    entry.setAttribute('data-dictionary', dictName);
+
+                    const dictNameElement = entry.querySelector('i');
+                    if (dictNameElement) {
+                        dictNameElement.textContent = dictName;
+                    }
+                }
+            });
+        },
+
+        ensureGlossaryListFormat() {
+            const singleDictionaryEntry = this.elements.singleDictionaryEntry;
+            if (!singleDictionaryEntry) return;
+
+            // get the dictionary name from 'i' element
+            const dictNameElement = singleDictionaryEntry.querySelector('i');
+            if (!dictNameElement) return;
+
+            const dictName = cleanDictionaryName(dictNameElement.textContent);
+
+            // create fragment with list structure
+            const fragment = document.createDocumentFragment();
+            const listElement = document.createElement("ol");
+            const listItem = document.createElement("li");
+
+            listItem.setAttribute("data-dictionary", dictName);
+            listItem.innerHTML = singleDictionaryEntry.innerHTML;
+
+            listElement.appendChild(listItem);
+            fragment.appendChild(listElement);
+
+            singleDictionaryEntry.innerHTML = "";
+            singleDictionaryEntry.appendChild(fragment);
+
+            this.elements.dictionaryEntries = document.querySelectorAll("li[data-dictionary]");
+        },
+
+        detectNarrowMode() {
+            this.isNarrow = window.innerWidth <= 500;
+            return this.isNarrow;
+        },
+
+        applyFontSettings() {
+            const {lapisCard} = this.elements;
+            if (!lapisCard) return;
+
+            const fontConfigs = this.fontConfigs;
+            if (!fontConfigs) return;
+
+            fontConfigs.forEach(config => {
+                const element = window.cardContext.elements[config.element];
+                if (element) {
+                    const savedFont = localStorage.getItem(config.storageKey) || config.defaultFont;
+                    lapisCard.style.setProperty(config.cssVar, savedFont);
+                    element.value = savedFont;
+                }
+            });
+        },
+
+        init() {
+            if (this.initialized) return;
+
+            this.cacheElements();
+            this.ensureGlossaryListFormat();
+            this.identifyActiveDictionaries();
+            this.detectNarrowMode();
+            this.applyFontSettings();
+
+            this.initialized = true;
+        }
+    }
+
+
+    function setupGallery() {
+        if (!window.cardContext) return;
+
+        function collectFromDictionaries() {
+            const allImages = [];
+            const uniqueUrls = new Set();
+            const containersToHide = [];
+
+            // Collect existing images first
+            const existingImages = getAllElements('.dh-right .image img');
+            existingImages.forEach(img => {
+                if (img.src && img.src !== window.location.href && !uniqueUrls.has(img.src)) {
+                    uniqueUrls.add(img.src);
+                    allImages.push(img.cloneNode(true));
+                }
+            });
+
+            // Collect from dictionary entries
+            window.cardContext.dictionaries.active.forEach(dictName => {
+                const selector = window.cardContext.dictionaries.imageSelectors[dictName] ||
+                    window.cardContext.dictionaries.imageSelectors.default;
+
+                getAllElements(`li[data-dictionary="${dictName}"], .yomitan-glossary:has(> i)`).forEach(entry => {
+                    const imageContainers = entry.querySelectorAll(selector);
+                    imageContainers.forEach(container => {
+                        const imgs = container.querySelectorAll('img');
+                        if (imgs.length > 0) {
+                            containersToHide.push(container);
+                            imgs.forEach(img => {
+                                if (img.src && img.src !== window.location.href && !uniqueUrls.has(img.src)) {
+                                    uniqueUrls.add(img.src);
+                                    const newImg = new Image();
+                                    newImg.src = img.src;
+                                    newImg.alt = img.alt || '';
+                                    if (img.title) newImg.title = img.title;
+                                    Object.assign(newImg.dataset, img.dataset);
+                                    allImages.push(newImg);
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+
+            // Hide original containers
+            containersToHide.forEach(container => {
+                container.style.display = 'none';
+            });
+
+            return allImages;
+        }
+
+        function cycleImage(direction) {
+            if (window.cardContext.images.length <= 1) return;
+
+            window.cardContext.imageIndex = direction > 0
+                ? (window.cardContext.imageIndex + 1) % window.cardContext.images.length
+                : (window.cardContext.imageIndex - 1 + window.cardContext.images.length) % window.cardContext.images.length;
+
+            displayImage(window.cardContext.imageIndex);
+        }
+
+        function createGalleryContainer() {
+            let dhRight = getElement('.dh-right');
+
+            if (!dhRight) {
+                const defHeader = getElement('.def-header');
+                if (!defHeader) return;
+
+                dhRight = document.createElement('div');
+                dhRight.className = 'dh-right';
+                defHeader.appendChild(dhRight);
+            }
+
+            let imageContainer = dhRight.querySelector('.image');
+            if (!imageContainer) {
+                imageContainer = document.createElement('div');
+                imageContainer.className = 'image tappable';
+                dhRight.appendChild(imageContainer);
+            }
+
+            imageContainer.innerHTML = '';
+
+            // Add navigation if multiple images
+            if (window.cardContext.images.length > 1) {
+                const leftEdge = document.createElement('div');
+                leftEdge.className = 'edge tappable image-left-edge';
+                leftEdge.onclick = () => cycleImage(-1);
+
+                const rightEdge = document.createElement('div');
+                rightEdge.className = 'edge tappable image-right-edge';
+                rightEdge.onclick = () => cycleImage(1);
+
+                imageContainer.appendChild(leftEdge);
+                imageContainer.appendChild(rightEdge);
+            }
+        }
+
+        function setHeightAfterLoad(img) {
+            const setHeight = () => {
+                const dhLeft = getElement('.dh-left');
+                const defHeader = getElement('.def-header');
+
+                if (dhLeft) {
+                    const dhLeftHeight = dhLeft.offsetHeight;
+                    img.style.maxHeight = `${dhLeftHeight}px`;
+                    if (defHeader) defHeader.style.maxHeight = `${dhLeftHeight}px`;
+                }
+            };
+
+            if (img.complete && img.naturalHeight !== 0) {
+                setHeight();
+            } else {
+                img.onload = setHeight;
+                img.onerror = setHeight;
+            }
+        }
+
+        function setupLightbox() {
+            const modalBg = getElement(".modal-bg");
+            const imgPopup = getElement(".img-popup");
+
+            if (!modalBg || !imgPopup) return;
+
+            const images = document.querySelectorAll(".image img, .def-image img");
+
+            if (images.length < 1) return;
+
+            images.forEach(image => {
+                // Remove any existing listeners to prevent duplicates
+                image.removeEventListener("click", image._lightboxHandler);
+
+                image._lightboxHandler = () => showLightbox(image, modalBg, imgPopup);
+                image.addEventListener("click", image._lightboxHandler);
+            });
+
+            // Setup modal close listener (only once)
+            if (!modalBg._closeHandlerAttached) {
+                modalBg.addEventListener("click", () => hideLightbox(modalBg, imgPopup));
+                modalBg._closeHandlerAttached = true;
+            }
+        }
+
+        function showLightbox(image, modalBg, imgPopup) {
+            const container = document.createElement("div");
+            const img = document.createElement("img");
+
+            container.classList.add("img-popup-container");
+            img.src = image.src;
+            img.classList.add("img-popup-img");
+
+            if (image.height > image.width) {
+                container.style.height = "calc(100% - 20px)";
+                container.style.width = "max-content";
+            }
+
+            imgPopup.innerHTML = "";
+            imgPopup.appendChild(container);
+            container.appendChild(img);
+
+            void modalBg.offsetWidth; // Force reflow
+            modalBg.style.display = "block";
+            void modalBg.offsetWidth; // Force another reflow
+
+            modalBg.classList.add("active");
+            container.classList.add("active");
+            document.body.classList.add("img-popup");
+        }
+
+        function hideLightbox(modalBg, imgPopup) {
+            modalBg.classList.remove("active");
+            const activeContainer = getElement(".img-popup-container.active");
+            if (activeContainer) activeContainer.classList.remove("active");
+
+            setTimeout(() => {
+                document.body.classList.remove("img-popup");
+                modalBg.style.display = "none";
+                imgPopup.innerHTML = "";
+            }, 300);
+        }
+
+        function displayImage(index) {
+            const imageContainer = getElement('.dh-right .image');
+            if (!imageContainer || !window.cardContext.images[index]) return;
+
+            // Remove existing image
+            const existingImg = imageContainer.querySelector('img');
+            if (existingImg) existingImg.remove();
+
+            // Add new image
+            const img = window.cardContext.images[index].cloneNode(true);
+            const edges = imageContainer.querySelectorAll('.edge');
+
+            if (edges.length > 0) {
+                imageContainer.insertBefore(img, edges[edges.length - 1].nextSibling);
+            } else {
+                imageContainer.appendChild(img);
+            }
+
+            // Set height after image loads
+            setHeightAfterLoad(img);
+            setupLightbox();
+        }
+
+        function setupKeyboardNavigation() {
+            if (!document.head.classList.contains("has-image-keyboard-listener")) {
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowUp' && window.cardContext.images.length > 1) {
+                        cycleImage(-1);
+                        e.preventDefault();
+                    } else if (e.key === 'ArrowDown' && window.cardContext.images.length > 1) {
+                        cycleImage(1);
+                        e.preventDefault();
+                    }
+                });
+                document.head.classList.add("has-image-keyboard-listener");
+            }
+        }
+
+        window.cardContext.images = collectFromDictionaries();
+
+        if (window.cardContext.images.length === 0) {
+            const dhRight = getElement('.dh-right');
+            if (dhRight) dhRight.style.display = 'none';
+            return;
+        }
+
+        createGalleryContainer();
+        displayImage(0);
+        setupKeyboardNavigation();
+    }
+
+    function setupTransparencyListeners() {
+        const transparencySlider = window.cardContext.elements.transparencySlider;
+        if (!transparencySlider) return;
+
+        function loadSavedTransparentSetting() {
+            const {lapisCard, transparencyValue, transparencySlider} = window.cardContext.elements;
+            if (!lapisCard || !transparencyValue || !transparencySlider) return;
+
+            const savedTransparencyValue = localStorage.getItem("lapisTransparency");
+            if (savedTransparencyValue) {
+                lapisCard.style.setProperty('--transparency-level', savedTransparencyValue);
+                transparencySlider.value = savedTransparencyValue
+                transparencyValue.textContent = Math.round(savedTransparencyValue * 100) + '%';
+            }
+        }
+
+        function handleTransparencyChange(transparency) {
+            const lapisCard = window.cardContext.elements.lapisCard;
+            if (!lapisCard) return;
+
+            lapisCard.style.setProperty('--transparency-level', transparency);
+            localStorage.setItem("lapisTransparency", transparency);
+
+            // Update display value
+            const transparencyValue = window.cardContext.elements.transparencyValue;
+            if (transparencyValue) {
+                transparencyValue.textContent = Math.round(transparency * 100) + '%';
+            }
+        }
+
+        // Set initial values
+        loadSavedTransparentSetting();
+
+        transparencySlider.addEventListener('input', (e) => {
+            preventBubbling(e);
+            handleTransparencyChange(e.target.value);
+        });
+    }
+
+
+    function setupFontListeners() {
+        const {lapisCard} = window.cardContext.elements;
+
+        const fontConfigs = window.cardContext.fontConfigs;
+
+        window.cardContext.applyFontSettings();
+
+        fontConfigs.forEach(config => {
+            const element = window.cardContext.elements[config.element];
+            if (element) {
+                element.addEventListener('change', (e) => {
+                    preventBubbling(e);
+                    lapisCard.style.setProperty(config.cssVar, e.target.value);
+                    localStorage.setItem(config.storageKey, e.target.value);
+                });
+                element.addEventListener('click', preventBubbling);
+            }
+        });
+    }
+
+
+    function setupSettingsPanelListeners() {
+        const {settingsPanel, settingsButton} = window.cardContext.elements;
+        if (!settingsPanel || !settingsButton) return;
+
+        // Settings button event listeners
+        settingsButton.addEventListener('click', (e) => {
+            preventBubbling(e);
+            settingsPanel.style.display = 'block';
+        });
+
+        // Prevent bubbling on the entire settings panel
+        settingsPanel.addEventListener('click', preventBubbling);
+
+        // Close panel when clicking/touching outside
+        document.addEventListener('click', (e) => {
+            if (!settingsPanel.contains(e.target) && !settingsButton.contains(e.target)) {
+                settingsPanel.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('touchstart', (e) => {
+            if (!settingsPanel.contains(e.target) && !settingsButton.contains(e.target)) {
+                settingsPanel.style.display = 'none';
+            }
+        }, {passive: true});
+    }
+
+    function setupGlobalEventListeners() {
+        function setupSettingsListeners() {
+            setupSettingsPanelListeners();
+            setupFontListeners();
+            setupTransparencyListeners();
+            window.cardContext.settingsListenersAttached = true;
+        }
+
+        // Window resize
+        window.addEventListener("resize", function () {
+            window.cardContext.detectNarrowMode()
+
+            if (!window.cardContext.isNarrow && !window.cardContext.settingsListenersAttached) {
+                setupSettingsListeners();
+            }
+
+        }, {passive: true});
+
+
+        // Only set event listeners for settings if not in narrow mode
+        if (!window.cardContext.isNarrow && !window.cardContext.settingsListenersAttached) {
+            setupSettingsListeners();
+        }
+    }
+
+    function initialize() {
+        initializeLapisBase();
+
+        if (!window.cardContext || window.cardContext.initialized) return;
+
+        window.cardContext.init();
+
+        requestAnimationFrame(() => {
+            setupGallery();
+            setupGlobalEventListeners();
+        });
     }
 
     initialize();
