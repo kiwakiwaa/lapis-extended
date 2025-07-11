@@ -252,6 +252,14 @@
     rgb(234, 223, 126));
 }
 
+.iphone {
+    --general-dict-border-color: rgba(207, 207, 207, 0.7);
+}
+
+.iphone .nightMode {
+    --general-dict-border-color: rgba(113, 113, 113, 0.7);
+}
+
 .android .nightMode {
     --bg-color: black;
     --fg-color: white;
@@ -979,6 +987,12 @@ footer {
     border-radius: 0;
 }
 
+.iphone .dh-left,
+.ipad .dh-left {
+    padding: 0.3em 0;
+    border-radius: 5px;
+}
+
 .mobile .dh-left:has(~ .dh-right) {
     max-width: 60vw;
 }
@@ -1286,6 +1300,13 @@ li[data-details] > i {
     letter-spacing: 0.5px;
 }
 
+.iphone li[data-dictionary],
+.iphone li[data-details],
+.ipad li[data-dictionary],
+.ipad li[data-details] {
+    border-left: 1px solid var(--general-dict-border-color);
+}
+
 li[data-dictionary="旺文社国語辞典 第十二版"] > i {
     border-bottom: 3px solid var(--obunsha-kokugo-border-color);
 }
@@ -1589,6 +1610,10 @@ settings[data-jitendex-format~="no-img"] + #qa .definition {
     z-index: 1;
 }
 
+
+.html:has(.iphone) {
+    margin-bottom: 0 !important;
+}
 
 /* -------------------------------- */
 /* ----- iOS specific styling ----- */
