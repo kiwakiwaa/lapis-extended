@@ -15,7 +15,7 @@ An advanced yet lightweight [Anki](https://apps.ankiweb.net/) notetype, thoughtf
   - [Key features](#key-features)
   - [How to use Lapis](#how-to-use-lapis)
   - [How to update Lapis](#how-to-update-lapis)
-  - [Lapis themes](#lapis-themes)
+  - [Lapis forks](#lapis-forks)
   - [FAQ](#faq)
     - [What is all this Anki, notetype and mining stuff?](#what-is-all-this-anki-notetype-and-mining-stuff)
     - [How do I set up sentence furigana?](#how-do-i-set-up-sentence-furigana)
