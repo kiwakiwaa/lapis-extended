@@ -1,113 +1,115 @@
-<!---------- Header ------------->
-<header style="visibility: hidden"></header>
+<lapis id="lapis">
+    <!---------- Header ------------->
+    <header style="visibility: hidden"></header>
 
-<main lang="ja" style="width: 100%;">
-    <div class="lapis-card">
-        <!--------- Vocab card ---------->
-        {{^IsSentenceCard}} {{^IsWordAndSentenceCard}} {{^IsClickCard}}
-        {{^IsAudioCard}}
-        <div lang="ja" class="front-vocab">{{Expression}}</div>
-        {{/IsAudioCard}} {{/IsClickCard}} {{/IsWordAndSentenceCard}}
-        {{/IsSentenceCard}}
-
-        <!------- Sentence card --------->
-        {{#IsSentenceCard}}
-        <div lang="ja" class="front-sentence">{{kanji:Sentence}}</div>
-        {{/IsSentenceCard}}
-
-        <!--------- Word And Sentence card ----------->
-        {{#IsWordAndSentenceCard}}
-        <div lang="ja" class="front-vocab">{{Expression}}</div>
-        <div lang="ja" id="hint">{{kanji:Sentence}}</div>
-        {{/IsWordAndSentenceCard}}
-
-        <!-------- Click card ----------->
-        {{#IsClickCard}}
-        <div id="click" class="tappable">
+    <main lang="ja" style="width: 100%;">
+        <div class="lapis-card">
+            <!--------- Vocab card ---------->
+            {{^IsSentenceCard}} {{^IsWordAndSentenceCard}} {{^IsClickCard}}
+            {{^IsAudioCard}}
             <div lang="ja" class="front-vocab">{{Expression}}</div>
-        </div>
-        {{/IsClickCard}}
+            {{/IsAudioCard}} {{/IsClickCard}} {{/IsWordAndSentenceCard}}
+            {{/IsSentenceCard}}
 
-        <!-------- Audio card ----------->
-        {{#IsAudioCard}}
-        <div id="audio">
+            <!------- Sentence card --------->
+            {{#IsSentenceCard}}
             <div lang="ja" class="front-sentence">{{kanji:Sentence}}</div>
-            <div>
-                {{#SentenceAudio}}{{SentenceAudio}}{{/SentenceAudio}}
-                {{^SentenceAudio}}{{ExpressionAudio}}{{/SentenceAudio}}
+            {{/IsSentenceCard}}
+
+            <!--------- Word And Sentence card ----------->
+            {{#IsWordAndSentenceCard}}
+            <div lang="ja" class="front-vocab">{{Expression}}</div>
+            <div lang="ja" id="hint">{{kanji:Sentence}}</div>
+            {{/IsWordAndSentenceCard}}
+
+            <!-------- Click card ----------->
+            {{#IsClickCard}}
+            <div id="click" class="tappable">
+                <div lang="ja" class="front-vocab">{{Expression}}</div>
+            </div>
+            {{/IsClickCard}}
+
+            <!-------- Audio card ----------->
+            {{#IsAudioCard}}
+            <div id="audio">
+                <div lang="ja" class="front-sentence">{{kanji:Sentence}}</div>
+                <div>
+                    {{#SentenceAudio}}{{SentenceAudio}}{{/SentenceAudio}}
+                    {{^SentenceAudio}}{{ExpressionAudio}}{{/SentenceAudio}}
+                </div>
+            </div>
+            {{/IsAudioCard}}
+
+            <!-- Hint -->
+            {{#Hint}}
+            <div id="hint">{{Hint}}</div>
+            {{/Hint}}
+        </div>
+
+        <div id="settings-menu">
+            <button id="settings-button" aria-label="設定メニュー">☰</button>
+            <div id="settings-panel">
+                <div class="settings-item" id="transparency-setting">
+                    <label for="transparency-level">透明度:</label>
+                    <input type="range" id="transparency-level" min="0.1" max="1" step="0.1" value="1">
+                    <span id="transparency-value">100%</span>
+                </div>
+
+                <div class="settings-item">
+                    <label for="term-font">表記フォント:</label>
+                    <select id="term-font">
+                        <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                        <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                        <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                        <option value="Yu Mincho Pr6N">游明朝体</option>
+                        <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                        <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                        <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                    </select>
+                </div>
+
+                <div class="settings-item">
+                    <label for="reading-font">読みフォント:</label>
+                    <select id="reading-font">
+                        <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                        <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                        <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                        <option value="Yu Mincho Pr6N">游明朝体</option>
+                        <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                        <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                        <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                    </select>
+                </div>
+
+                <div class="settings-item">
+                    <label for="sentence-font">例文フォント:</label>
+                    <select id="sentence-font">
+                        <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                        <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                        <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                        <option value="Yu Mincho Pr6N">游明朝体</option>
+                        <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                        <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                        <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                    </select>
+                </div>
+
+                <div class="settings-item">
+                    <label for="dictionary-font">辞書フォント:</label>
+                    <select id="dictionary-font">
+                        <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                        <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                        <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                        <option value="Yu Mincho Pr6N">游明朝体</option>
+                        <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                        <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                        <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                    </select>
+                </div>
             </div>
         </div>
-        {{/IsAudioCard}}
-
-        <!-- Hint -->
-        {{#Hint}}
-        <div id="hint">{{Hint}}</div>
-        {{/Hint}}
-    </div>
-
-    <div id="settings-menu">
-        <button id="settings-button" aria-label="設定メニュー">☰</button>
-        <div id="settings-panel">
-            <div class="settings-item" id="transparency-setting">
-                <label for="transparency-level">透明度:</label>
-                <input type="range" id="transparency-level" min="0.1" max="1" step="0.1" value="1">
-                <span id="transparency-value">100%</span>
-            </div>
-
-            <div class="settings-item">
-                <label for="term-font">表記フォント:</label>
-                <select id="term-font">
-                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
-                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
-                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
-                    <option value="Yu Mincho Pr6N">游明朝体</option>
-                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
-                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
-                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
-                </select>
-            </div>
-
-            <div class="settings-item">
-                <label for="reading-font">読みフォント:</label>
-                <select id="reading-font">
-                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
-                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
-                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
-                    <option value="Yu Mincho Pr6N">游明朝体</option>
-                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
-                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
-                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
-                </select>
-            </div>
-
-            <div class="settings-item">
-                <label for="sentence-font">例文フォント:</label>
-                <select id="sentence-font">
-                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
-                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
-                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
-                    <option value="Yu Mincho Pr6N">游明朝体</option>
-                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
-                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
-                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
-                </select>
-            </div>
-
-            <div class="settings-item">
-                <label for="dictionary-font">辞書フォント:</label>
-                <select id="dictionary-font">
-                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
-                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
-                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
-                    <option value="Yu Mincho Pr6N">游明朝体</option>
-                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
-                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
-                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
-                </select>
-            </div>
-        </div>
-    </div>
-</main>
+    </main>
+</lapis>
 
 <script>
     // ============================================================================

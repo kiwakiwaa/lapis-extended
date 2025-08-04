@@ -1,181 +1,183 @@
-<!---------- Header ------------->
-<header>
-    <div class="top-container">
-        <!-- Show the frequency number -->
-        {{FreqSort}}
+<lapis id="lapis">
+    <!---------- Header ------------->
+    <header>
+        <div class="top-container">
+            <!-- Show the frequency number -->
+            {{FreqSort}}
 
-        <!-- The frequency list -->
-        {{#Frequency}}
-        <span class="freq-dropdown">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" class="dropdown-arrow-svg"
-                 viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
-                <path d="M 12.7,6.5 H 3.3 L 8,11 Z"></path>
-            </svg>
-            <div class="freq-list-container">{{Frequency}}</div>
-        </span>
-        {{/Frequency}}
-    </div>
-</header>
+            <!-- The frequency list -->
+            {{#Frequency}}
+            <span class="freq-dropdown">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" class="dropdown-arrow-svg"
+                     viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+                    <path d="M 12.7,6.5 H 3.3 L 8,11 Z"></path>
+                </svg>
+                <div class="freq-list-container">{{Frequency}}</div>
+            </span>
+            {{/Frequency}}
+        </div>
+    </header>
 
-<main lang="ja">
-    <div class="lapis-card">
-        <!-- The first row (vocab box+picture) -->
-        <div class="def-header">
-            <div class="dh-left">
-                <div class="vocab">
-                    {{#ExpressionFurigana}}{{furigana:ExpressionFurigana}}{{/ExpressionFurigana}}
-                    {{^ExpressionFurigana}}{{Expression}}{{/ExpressionFurigana}}
-                </div>
-
-                <!-- Reading + Pitch Accent -->
-                <div class="info">
-                    <div class="pitch">
-                        {{#ExpressionFurigana}}{{kana:ExpressionFurigana}}{{/ExpressionFurigana}}
-                        {{^ExpressionFurigana}}{{ExpressionReading}}{{/ExpressionFurigana}}
+    <main lang="ja">
+        <div class="lapis-card">
+            <!-- The first row (vocab box+picture) -->
+            <div class="def-header">
+                <div class="dh-left">
+                    <div class="vocab">
+                        {{#ExpressionFurigana}}{{furigana:ExpressionFurigana}}{{/ExpressionFurigana}}
+                        {{^ExpressionFurigana}}{{Expression}}{{/ExpressionFurigana}}
                     </div>
 
-                    <!-- Pitch Accent -->
-                    {{#PitchPosition}}
-                    <span id="pitch-tags" class="tags"> {{PitchPosition}} </span>
-                    {{/PitchPosition}}
-                    <br/>
-                    <div class="audio-buttons">{{ExpressionAudio}} {{SentenceAudio}}</div>
+                    <!-- Reading + Pitch Accent -->
+                    <div class="info">
+                        <div class="pitch">
+                            {{#ExpressionFurigana}}{{kana:ExpressionFurigana}}{{/ExpressionFurigana}}
+                            {{^ExpressionFurigana}}{{ExpressionReading}}{{/ExpressionFurigana}}
+                        </div>
+
+                        <!-- Pitch Accent -->
+                        {{#PitchPosition}}
+                        <span id="pitch-tags" class="tags"> {{PitchPosition}} </span>
+                        {{/PitchPosition}}
+                        <br/>
+                        <div class="audio-buttons">{{ExpressionAudio}} {{SentenceAudio}}</div>
+                    </div>
+                </div>
+
+                <!-- Image -->
+                {{#Picture}}
+                <div class="dh-right">
+                    <div class="image tappable {{Tags}}">{{Picture}}</div>
+                </div>
+                {{/Picture}}
+            </div>
+
+            <br>
+            <div class="sentence">
+                {{#SentenceFurigana}} {{furigana:SentenceFurigana}} {{/SentenceFurigana}}
+                {{^SentenceFurigana}} {{furigana:Sentence}} {{/SentenceFurigana}}
+            </div>
+
+            <!-- The entire definition box -->
+            <div class="def-info">First Definition 1/?</div>
+            <div class="main-def">
+                <div class="edge tappable" id="edge-prev" onclick="changeIndex(-1)"></div>
+                <div class="edge tappable" id="edge-next" onclick="changeIndex(1)"></div>
+                {{#DefinitionPicture}}
+                <div class="def-image tappable">{{DefinitionPicture}}</div>
+                {{/DefinitionPicture}}
+                <div class="definition">
+                    {{#SelectionText}}
+                    <div id="selection" data-display-name="Text Selection">{{SelectionText}}</div>
+                    {{/SelectionText}}
+                    {{#MainDefinition}}
+                    <div id="primary" data-display-name="Primary Definition">{{MainDefinition}}</div>
+                    {{/MainDefinition}}
+                    <div id="glossaries" data-display-name="Glossaries">{{Glossary}}</div>
                 </div>
             </div>
 
-            <!-- Image -->
-            {{#Picture}}
-            <div class="dh-right">
-                <div class="image tappable {{Tags}}">{{Picture}}</div>
+            <!-- This is for the sentence that you see on mobile (positioned under definition), on Desktop, the sentence goes above the definition box, and this is hidden -->
+            <div class="sentence-mobile">
+                {{#SentenceFurigana}} {{furigana:SentenceFurigana}} {{/SentenceFurigana}}
+                {{^SentenceFurigana}} {{furigana:Sentence}} {{/SentenceFurigana}}
             </div>
-            {{/Picture}}
+
+            <!------- Image modal --------->
+            <div class="modal-bg tappable">
+                <div class="img-popup"></div>
+            </div>
+
+            {{#MiscInfo}}
+            <details>
+                <summary>Misc. info</summary>
+                <div class="misc-info">
+                    === Details ===
+                    <br/>
+                    {{MiscInfo}}
+                </div>
+            </details>
+            {{/MiscInfo}}
         </div>
 
+        <!------- User settings window --------->
+        <div id="settings-menu">
+            <button id="settings-button" aria-label="設定メニュー">☰</button>
+            <div id="settings-panel">
+                <div class="settings-item" id="transparency-setting">
+                    <label for="transparency-level">透明度:</label>
+                    <input type="range" id="transparency-level" min="0.1" max="1" step="0.1" value="1">
+                    <span id="transparency-value">100%</span>
+                </div>
+
+                <div class="settings-item">
+                    <label for="term-font">表記フォント:</label>
+                    <select id="term-font">
+                        <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                        <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                        <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                        <option value="Yu Mincho Pr6N">游明朝体</option>
+                        <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                        <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                        <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                    </select>
+                </div>
+
+                <div class="settings-item">
+                    <label for="reading-font">読みフォント:</label>
+                    <select id="reading-font">
+                        <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                        <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                        <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                        <option value="Yu Mincho Pr6N">游明朝体</option>
+                        <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                        <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                        <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                    </select>
+                </div>
+
+                <div class="settings-item">
+                    <label for="sentence-font">例文フォント:</label>
+                    <select id="sentence-font">
+                        <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                        <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                        <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                        <option value="Yu Mincho Pr6N">游明朝体</option>
+                        <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                        <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                        <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                    </select>
+                </div>
+
+                <div class="settings-item">
+                    <label for="dictionary-font">辞書フォント:</label>
+                    <select id="dictionary-font">
+                        <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
+                        <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
+                        <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
+                        <option value="Yu Mincho Pr6N">游明朝体</option>
+                        <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
+                        <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
+                        <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!----------- Footer ------------->
+    <footer lang="ja">
         <br>
-        <div class="sentence">
-            {{#SentenceFurigana}} {{furigana:SentenceFurigana}} {{/SentenceFurigana}}
-            {{^SentenceFurigana}} {{furigana:Sentence}} {{/SentenceFurigana}}
+        <div class="bot-container">
+            {{#Tags}}
+            <div class="tags-container">
+                <div class="tags">{{Tags}}</div>
+            </div>
+            {{/Tags}}
         </div>
-
-        <!-- The entire definition box -->
-        <div class="def-info">First Definition 1/?</div>
-        <div class="main-def">
-            <div class="edge tappable" id="edge-prev" onclick="changeIndex(-1)"></div>
-            <div class="edge tappable" id="edge-next" onclick="changeIndex(1)"></div>
-            {{#DefinitionPicture}}
-            <div class="def-image tappable">{{DefinitionPicture}}</div>
-            {{/DefinitionPicture}}
-            <div class="definition">
-                {{#SelectionText}}
-                <div id="selection" data-display-name="Text Selection">{{SelectionText}}</div>
-                {{/SelectionText}}
-                {{#MainDefinition}}
-                <div id="primary" data-display-name="Primary Definition">{{MainDefinition}}</div>
-                {{/MainDefinition}}
-                <div id="glossaries" data-display-name="Glossaries">{{Glossary}}</div>
-            </div>
-        </div>
-
-        <!-- This is for the sentence that you see on mobile (positioned under definition), on Desktop, the sentence goes above the definition box, and this is hidden -->
-        <div class="sentence-mobile">
-            {{#SentenceFurigana}} {{furigana:SentenceFurigana}} {{/SentenceFurigana}}
-            {{^SentenceFurigana}} {{furigana:Sentence}} {{/SentenceFurigana}}
-        </div>
-
-        <!------- Image modal --------->
-        <div class="modal-bg tappable">
-            <div class="img-popup"></div>
-        </div>
-
-        {{#MiscInfo}}
-        <details>
-            <summary>Misc. info</summary>
-            <div class="misc-info">
-                === Details ===
-                <br/>
-                {{MiscInfo}}
-            </div>
-        </details>
-        {{/MiscInfo}}
-    </div>
-
-    <!------- User settings window --------->
-    <div id="settings-menu">
-        <button id="settings-button" aria-label="設定メニュー">☰</button>
-        <div id="settings-panel">
-            <div class="settings-item" id="transparency-setting">
-                <label for="transparency-level">透明度:</label>
-                <input type="range" id="transparency-level" min="0.1" max="1" step="0.1" value="1">
-                <span id="transparency-value">100%</span>
-            </div>
-
-            <div class="settings-item">
-                <label for="term-font">表記フォント:</label>
-                <select id="term-font">
-                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
-                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
-                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
-                    <option value="Yu Mincho Pr6N">游明朝体</option>
-                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
-                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
-                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
-                </select>
-            </div>
-
-            <div class="settings-item">
-                <label for="reading-font">読みフォント:</label>
-                <select id="reading-font">
-                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
-                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
-                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
-                    <option value="Yu Mincho Pr6N">游明朝体</option>
-                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
-                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
-                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
-                </select>
-            </div>
-
-            <div class="settings-item">
-                <label for="sentence-font">例文フォント:</label>
-                <select id="sentence-font">
-                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
-                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
-                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
-                    <option value="Yu Mincho Pr6N">游明朝体</option>
-                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
-                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
-                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
-                </select>
-            </div>
-
-            <div class="settings-item">
-                <label for="dictionary-font">辞書フォント:</label>
-                <select id="dictionary-font">
-                    <option value="Hiragino Mincho ProN">ヒラギノ明朝</option>
-                    <option value="Hiragino Kaku Gothic ProN">ヒラギノ角ゴ</option>
-                    <option value="Hiragino Maru Gothic ProN">ヒラギノ丸ゴ</option>
-                    <option value="Yu Mincho Pr6N">游明朝体</option>
-                    <option value="FOT-TsukuOldMinPro">FOT-筑紫オールド明朝</option>
-                    <option value="DFGyoSho Pro-5">ＤＦ行書体</option>
-                    <option value="DFGiHi Pro-5">ＤＦ魏碑体</option>
-                </select>
-            </div>
-        </div>
-    </div>
-</main>
-
-<!----------- Footer ------------->
-<footer lang="ja">
-    <br>
-    <div class="bot-container">
-        {{#Tags}}
-        <div class="tags-container">
-            <div class="tags">{{Tags}}</div>
-        </div>
-        {{/Tags}}
-    </div>
-</footer>
+    </footer>
+</lapis>
 
 <!----------- Scripts ------------>
 <script>
@@ -565,8 +567,8 @@
                 if (miscInfo) miscInfo.open = true;
             }
         }
-        const qa = document.getElementById("qa");
-        qa.parentElement.insertBefore(settings, qa);
+        const lapis = document.getElementById("lapis");
+        lapis.parentElement.insertBefore(settings, lapis);
     }
 
     // Initialize all functions!!!
