@@ -354,13 +354,13 @@ html.mobile {
 }
 
 #lapis {
-  display: flex;
-  align-items: stretch;
-  flex-direction: column;
-  min-height: calc(100vh - 40px);
-  font-family: var(--font-serif);
-  font-size: var(--main-font-size);
-  text-align: center;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    min-height: calc(100vh - 40px);
+    font-family: var(--font-serif);
+    font-size: var(--main-font-size);
+    text-align: center;
 }
 
 /* ------- Mobile css ------- */
@@ -632,12 +632,12 @@ main {
 /* Info (audio, reading) */
 .info {
     font-family: var(--font-sans), sans-serif;
-    font-size: var(--info-font-size);
+    font-size: var(--info-font-size, 0.9rem);
     color: var(--fg-color);
 }
 
 .mobile .info {
-    font-size: 0.9rem;
+    padding-top: 7px;
     padding-top: 7px;
 }
 
